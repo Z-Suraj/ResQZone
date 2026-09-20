@@ -91,7 +91,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               title={collapsed ? item.label : undefined}
             >
               <Icon className={`w-4 h-4 shrink-0 transition-transform ${
-                isActive ? 'text-rose-500 scale-110' : 'text-slate-400 group-hover:text-slate-200'
+                isActive ? 'text-rose-500 scale-110' : darkMode ? 'text-slate-400 group-hover:text-slate-200' : 'text-slate-500 group-hover:text-slate-800'
               }`} />
 
               {!collapsed && (
@@ -122,7 +122,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Bottom section with photographic inspiration card, settings, and collapse button */}
-      <div className="p-3 border-t border-slate-700/40 space-y-3">
+      <div className={`p-3 border-t space-y-3 ${darkMode ? 'border-slate-700/40' : 'border-slate-200'}`}>
         {/* Editorial visual card (matches reference image bottom-left photo) */}
         {!collapsed && (
           <div className="relative rounded-xl overflow-hidden border border-slate-700/60 shadow-lg group">
@@ -146,18 +146,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             onClick={onOpenSettings}
             className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-colors ${
-              darkMode ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-200 text-slate-600'
+              darkMode ? 'hover:bg-slate-800 text-slate-300' : 'hover:bg-slate-200 text-slate-700'
             }`}
             title={collapsed ? 'System Settings' : undefined}
           >
-            <Settings className="w-4 h-4 text-slate-400 shrink-0" />
+            <Settings className={`w-4 h-4 shrink-0 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
             {!collapsed && <span>Settings</span>}
           </button>
 
           <button
             onClick={onToggleCollapse}
             className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-colors ${
-              darkMode ? 'hover:bg-slate-800 text-slate-400 hover:text-slate-200' : 'hover:bg-slate-200 text-slate-500'
+              darkMode ? 'hover:bg-slate-800 text-slate-400 hover:text-slate-200' : 'hover:bg-slate-200 text-slate-600 hover:text-slate-900'
             }`}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
@@ -178,7 +178,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           const avatar = user?.avatar || generateInitialsAvatar(name, currentRole);
 
           return (
-            <div className="pt-2 border-t border-slate-700/40 flex items-center gap-2.5 px-1">
+            <div className={`pt-2 border-t flex items-center gap-2.5 px-1 ${darkMode ? 'border-slate-700/40' : 'border-slate-200'}`}>
               <div className="w-8 h-8 rounded-full overflow-hidden border border-rose-500/50 relative shrink-0">
                 <img 
                   src={avatar} 
@@ -188,10 +188,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <span className="w-2 h-2 rounded-full bg-emerald-500 absolute bottom-0 right-0 border border-slate-900" />
               </div>
               <div className="overflow-hidden text-left">
-                <div className="text-xs font-bold truncate text-slate-200">
+                <div className={`text-xs font-bold truncate ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>
                   {name}
                 </div>
-                <div className="text-[10px] text-rose-400 font-medium truncate uppercase tracking-wider">
+                <div className="text-[10px] text-rose-500 dark:text-rose-400 font-medium truncate uppercase tracking-wider">
                   {title}
                 </div>
               </div>

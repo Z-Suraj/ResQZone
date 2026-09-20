@@ -562,7 +562,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
               </div>
 
               {/* Basemap Switcher Pills */}
-              <div className="pointer-events-auto flex items-center bg-slate-950/85 backdrop-blur-md border border-slate-700/80 rounded-xl p-1 shadow-lg overflow-x-auto">
+              <div className={`pointer-events-auto flex items-center backdrop-blur-md border rounded-xl p-1 shadow-lg overflow-x-auto ${
+                darkMode ? 'bg-slate-950/85 border-slate-700/80' : 'bg-white/95 border-slate-200 shadow-md'
+              }`}>
                 {(['STANDARD', 'SATELLITE', 'NATURAL', 'TERRAIN'] as BasemapType[]).map((type) => {
                   const isActive = activeBasemap === type;
                   return (
@@ -572,7 +574,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                       className={`px-3 py-1 text-[11px] font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap ${
                         isActive 
                           ? 'bg-blue-600 text-white shadow-sm' 
-                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                          : darkMode 
+                            ? 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                            : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100'
                       }`}
                     >
                       {type.charAt(0) + type.slice(1).toLowerCase()}
@@ -586,14 +590,22 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
             <div className="absolute left-3 top-20 z-400 flex flex-col gap-1.5 pointer-events-auto">
               <button
                 onClick={() => mapInstanceRef.current?.zoomIn()}
-                className="w-8 h-8 rounded-lg bg-slate-950/85 hover:bg-slate-900 text-white border border-slate-700/80 flex items-center justify-center font-bold text-base shadow-lg transition-colors cursor-pointer"
+                className={`w-8 h-8 rounded-lg border flex items-center justify-center font-bold text-base shadow-lg transition-colors cursor-pointer ${
+                  darkMode 
+                    ? 'bg-slate-950/85 hover:bg-slate-900 text-white border-slate-700/80' 
+                    : 'bg-white/95 hover:bg-slate-100 text-slate-800 border-slate-200'
+                }`}
                 title="Zoom In"
               >
                 +
               </button>
               <button
                 onClick={() => mapInstanceRef.current?.zoomOut()}
-                className="w-8 h-8 rounded-lg bg-slate-950/85 hover:bg-slate-900 text-white border border-slate-700/80 flex items-center justify-center font-bold text-base shadow-lg transition-colors cursor-pointer"
+                className={`w-8 h-8 rounded-lg border flex items-center justify-center font-bold text-base shadow-lg transition-colors cursor-pointer ${
+                  darkMode 
+                    ? 'bg-slate-950/85 hover:bg-slate-900 text-white border-slate-700/80' 
+                    : 'bg-white/95 hover:bg-slate-100 text-slate-800 border-slate-200'
+                }`}
                 title="Zoom Out"
               >
                 &minus;
@@ -608,14 +620,22 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                     }
                   }
                 }}
-                className="w-8 h-8 rounded-lg bg-slate-950/85 hover:bg-slate-900 text-blue-400 border border-slate-700/80 flex items-center justify-center shadow-lg transition-colors cursor-pointer"
+                className={`w-8 h-8 rounded-lg border flex items-center justify-center shadow-lg transition-colors cursor-pointer ${
+                  darkMode 
+                    ? 'bg-slate-950/85 hover:bg-slate-900 text-blue-400 border-slate-700/80' 
+                    : 'bg-white/95 hover:bg-slate-100 text-blue-600 border-slate-200'
+                }`}
                 title="Center on My Location"
               >
                 <Crosshair className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setIsMapFullscreen(!isMapFullscreen)}
-                className="w-8 h-8 rounded-lg bg-slate-950/85 hover:bg-slate-900 text-slate-300 hover:text-white border border-slate-700/80 flex items-center justify-center shadow-lg transition-colors cursor-pointer"
+                className={`w-8 h-8 rounded-lg border flex items-center justify-center shadow-lg transition-colors cursor-pointer ${
+                  darkMode 
+                    ? 'bg-slate-950/85 hover:bg-slate-900 text-slate-300 hover:text-white border-slate-700/80' 
+                    : 'bg-white/95 hover:bg-slate-100 text-slate-700 hover:text-slate-950 border-slate-200'
+                }`}
                 title="Toggle Fullscreen"
               >
                 {isMapFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -629,11 +649,17 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
             />
 
             {/* Bottom-Right Legend Box */}
-            <div className="absolute bottom-3 right-3 z-400 bg-slate-950/90 backdrop-blur-md border border-slate-700/80 rounded-xl p-3 shadow-xl pointer-events-auto max-w-[210px] text-left">
-              <div className="text-[11px] font-extrabold text-white mb-2 tracking-wide uppercase">
+            <div className={`absolute bottom-3 right-3 z-400 backdrop-blur-md border rounded-xl p-3 shadow-xl pointer-events-auto max-w-[210px] text-left ${
+              darkMode ? 'bg-slate-950/90 border-slate-700/80' : 'bg-white/95 border-slate-200 shadow-md'
+            }`}>
+              <div className={`text-[11px] font-extrabold mb-2 tracking-wide uppercase ${
+                darkMode ? 'text-white' : 'text-slate-900'
+              }`}>
                 GIS Legend
               </div>
-              <div className="space-y-1.5 text-[10px] font-medium text-slate-300">
+              <div className={`space-y-1.5 text-[10px] font-medium ${
+                darkMode ? 'text-slate-300' : 'text-slate-700'
+              }`}>
                 <div className="flex items-center gap-2">
                   <span className="w-3.5 h-3.5 rounded-full bg-rose-600 flex items-center justify-center text-[8px] text-white font-bold">⚠️</span>
                   <span>High Hazard Zone</span>
@@ -670,36 +696,40 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
             </div>
 
             {/* Bottom-Left ResQZone GIS Scale Bar */}
-            <div className="absolute bottom-3 left-3 z-400 bg-slate-950/80 backdrop-blur-md border border-slate-700/60 rounded-lg px-2.5 py-1 text-[10px] text-slate-300 font-mono pointer-events-auto flex items-center gap-2">
-              <span className="font-bold text-white tracking-wider">RESQZONE GIS</span>
-              <span className="text-slate-500">|</span>
+            <div className={`absolute bottom-3 left-3 z-400 backdrop-blur-md border rounded-lg px-2.5 py-1 text-[10px] font-mono pointer-events-auto flex items-center gap-2 shadow-md ${
+              darkMode ? 'bg-slate-950/80 border-slate-700/60 text-slate-300' : 'bg-white/95 border-slate-200 text-slate-700'
+            }`}>
+              <span className={`font-bold tracking-wider ${darkMode ? 'text-white' : 'text-slate-900'}`}>RESQZONE GIS</span>
+              <span className={darkMode ? 'text-slate-500' : 'text-slate-400'}>|</span>
               <span className="text-[9px]">0 &nbsp; 2 &nbsp; 10 km</span>
             </div>
 
             {/* Interactive Segment Card Popup if clicked on map */}
             {selectedSegment && (
-              <div className="absolute top-20 left-3 right-3 sm:right-auto sm:w-96 z-450 bg-slate-950/95 backdrop-blur-md border border-blue-500/70 rounded-2xl p-4 shadow-2xl text-left space-y-2 pointer-events-auto">
+              <div className={`absolute top-20 left-3 right-3 sm:right-auto sm:w-96 z-450 backdrop-blur-md border rounded-2xl p-4 shadow-2xl text-left space-y-2 pointer-events-auto ${
+                darkMode ? 'bg-slate-950/95 border-blue-500/70' : 'bg-white/95 border-blue-300 shadow-xl'
+              }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-md bg-blue-600 text-white font-bold text-[10px] uppercase">
                       {selectedSegment.mode}
                     </span>
-                    <span className="text-xs text-slate-300 font-medium">
+                    <span className={`text-xs font-medium ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
                       {selectedSegment.distanceKm} km &bull; {selectedSegment.durationMinutes} min
                     </span>
                   </div>
-                  <button onClick={() => setSelectedSegment(null)} className="p-1 text-slate-400 hover:text-white">
+                  <button onClick={() => setSelectedSegment(null)} className={`p-1 ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-700'}`}>
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <div className="text-xs text-white font-bold">
+                <div className={`text-xs font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   {selectedSegment.fromTitle} &rarr; {selectedSegment.toTitle}
                 </div>
-                <div className="text-[11px] text-slate-400">
+                <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                   {selectedSegment.status}
                 </div>
                 {selectedSegment.availableSeats !== undefined && (
-                  <div className="text-xs text-emerald-400 font-bold">
+                  <div className="text-xs text-emerald-600 dark:text-emerald-400 font-bold">
                     Available Capacity: {selectedSegment.availableSeats} seats / {selectedSegment.totalSeats} total
                   </div>
                 )}
@@ -708,27 +738,31 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
 
             {/* Interactive Hazard Detail Modal */}
             {selectedHazard && !selectedSegment && (
-              <div className="absolute top-20 left-3 right-3 sm:right-auto sm:w-96 z-450 bg-slate-950/95 backdrop-blur-md border border-rose-600/70 rounded-2xl p-4 shadow-2xl text-left space-y-3 pointer-events-auto">
+              <div className={`absolute top-20 left-3 right-3 sm:right-auto sm:w-96 z-450 backdrop-blur-md border rounded-2xl p-4 shadow-2xl text-left space-y-3 pointer-events-auto ${
+                darkMode ? 'bg-slate-950/95 border-rose-600/70' : 'bg-white/95 border-rose-300 shadow-xl'
+              }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-md bg-rose-600 text-white font-bold text-[10px] uppercase">
                       {selectedHazard.severity} RISK
                     </span>
-                    <span className="text-xs text-slate-400 font-medium">
+                    <span className={`text-xs font-medium ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                       Monitored Hazard
                     </span>
                   </div>
-                  <button onClick={() => setSelectedHazard(null)} className="p-1 text-slate-400 hover:text-white cursor-pointer">
+                  <button onClick={() => setSelectedHazard(null)} className={`p-1 cursor-pointer ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-700'}`}>
                     <X className="w-4 h-4" />
                   </button>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-extrabold text-white">{selectedHazard.name}</h3>
-                  <p className="text-xs text-slate-300 mt-1 leading-relaxed">{selectedHazard.description}</p>
+                  <h3 className={`text-sm font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{selectedHazard.name}</h3>
+                  <p className={`text-xs mt-1 leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>{selectedHazard.description}</p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-rose-950/40 border border-rose-800/40 text-[11px] text-rose-300">
+                <div className={`p-2.5 rounded-xl border text-[11px] ${
+                  darkMode ? 'bg-rose-950/40 border-rose-800/40 text-rose-300' : 'bg-rose-50 border-rose-200 text-rose-800'
+                }`}>
                   <b>Action:</b> {selectedHazard.recommendedAction}
                 </div>
 
@@ -747,29 +781,33 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
 
             {/* Interactive Safe Zone Detail Modal */}
             {selectedSafeZone && !selectedHazard && !selectedSegment && (
-              <div className="absolute top-20 left-3 right-3 sm:right-auto sm:w-96 z-450 bg-slate-950/95 backdrop-blur-md border border-emerald-500/70 rounded-2xl p-4 shadow-2xl text-left space-y-3 pointer-events-auto">
+              <div className={`absolute top-20 left-3 right-3 sm:right-auto sm:w-96 z-450 backdrop-blur-md border rounded-2xl p-4 shadow-2xl text-left space-y-3 pointer-events-auto ${
+                darkMode ? 'bg-slate-950/95 border-emerald-500/70' : 'bg-white/95 border-emerald-300 shadow-xl'
+              }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-md bg-emerald-600 text-white font-bold text-[10px] uppercase">
                       SAFE ZONE
                     </span>
-                    <span className="text-xs text-emerald-400 font-medium">
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
                       {selectedSafeZone.distanceKm} km • {selectedSafeZone.travelTimeMin} min
                     </span>
                   </div>
-                  <button onClick={() => setSelectedSafeZone(null)} className="p-1 text-slate-400 hover:text-white cursor-pointer">
+                  <button onClick={() => setSelectedSafeZone(null)} className={`p-1 cursor-pointer ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-700'}`}>
                     <X className="w-4 h-4" />
                   </button>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-extrabold text-white">{selectedSafeZone.name}</h3>
-                  <p className="text-xs text-slate-300 mt-1">{selectedSafeZone.facilities.slice(0, 3).join(' • ')}</p>
+                  <h3 className={`text-sm font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{selectedSafeZone.name}</h3>
+                  <p className={`text-xs mt-1 ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>{selectedSafeZone.facilities.slice(0, 3).join(' • ')}</p>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-slate-300 border-t border-slate-800 pt-2">
-                  <span>Available Beds: <b className="text-emerald-400">{selectedSafeZone.availableCapacity}</b></span>
-                  <span>Capacity: <b className="text-white">{selectedSafeZone.safeCapacity}</b></span>
+                <div className={`flex items-center justify-between text-xs border-t pt-2 ${
+                  darkMode ? 'text-slate-300 border-slate-800' : 'text-slate-600 border-slate-200'
+                }`}>
+                  <span>Available Beds: <b className="text-emerald-600 dark:text-emerald-400">{selectedSafeZone.availableCapacity}</b></span>
+                  <span>Capacity: <b className={darkMode ? 'text-white' : 'text-slate-900'}>{selectedSafeZone.safeCapacity}</b></span>
                 </div>
 
                 <button
@@ -810,10 +848,12 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
             {/* List of Photo-backed Nearby Items */}
             <div className="space-y-2.5">
               {!currentLoc ? (
-                <div className="p-4 rounded-xl border border-dashed border-slate-700 text-center space-y-1.5">
-                  <MapPin className="w-5 h-5 text-slate-400 mx-auto" />
-                  <div className="text-xs font-bold text-white">No Sector Selected</div>
-                  <p className="text-[11px] text-slate-400">
+                <div className={`p-4 rounded-xl border border-dashed text-center space-y-1.5 ${
+                  darkMode ? 'border-slate-700 bg-slate-950/40' : 'border-slate-300 bg-slate-50'
+                }`}>
+                  <MapPin className={`w-5 h-5 mx-auto ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
+                  <div className={`text-xs font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>No Sector Selected</div>
+                  <p className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                     Use the search bar on the map to choose your district or city to see nearby alerts and safe zones.
                   </p>
                 </div>
@@ -848,8 +888,8 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                             {primaryHazard.severity}
                           </span>
                         </div>
-                        <div className="text-[11px] text-slate-400 font-medium">Near {currentLoc.name}</div>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-300 truncate mt-0.5">
+                        <div className={`text-[11px] font-medium ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Near {currentLoc.name}</div>
+                        <p className={`text-[11px] truncate mt-0.5 ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
                           {primaryHazard.description}
                         </p>
                       </div>
@@ -862,9 +902,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                         <ShieldCheck className="w-6 h-6" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs font-bold text-emerald-400">No Critical Hazard Nearby</div>
-                        <div className="text-[11px] text-slate-400 font-medium">{currentLoc.name} Sector</div>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-300 truncate mt-0.5">
+                        <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400">No Critical Hazard Nearby</div>
+                        <div className={`text-[11px] font-medium ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{currentLoc.name} Sector</div>
+                        <p className={`text-[11px] truncate mt-0.5 ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
                           Sector within normal environmental thresholds.
                         </p>
                       </div>
@@ -935,8 +975,8 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                             {nearbyHazards[1].severity}
                           </span>
                         </div>
-                        <div className="text-[11px] text-slate-400 font-medium">{nearbyHazards[1].type} Monitoring</div>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-300 truncate mt-0.5">
+                        <div className={`text-[11px] font-medium ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{nearbyHazards[1].type} Monitoring</div>
+                        <p className={`text-[11px] truncate mt-0.5 ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
                           {nearbyHazards[1].description}
                         </p>
                       </div>
@@ -952,9 +992,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                         <PhoneCall className="w-6 h-6" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs font-bold text-white">Emergency Response Line</div>
-                        <div className="text-[11px] text-slate-400 font-medium">National Helpline: 112</div>
-                        <p className="text-[11px] text-blue-400 truncate mt-0.5">
+                        <div className={`text-xs font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Emergency Response Line</div>
+                        <div className={`text-[11px] font-medium ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>National Helpline: 112</div>
+                        <p className="text-[11px] text-blue-600 dark:text-blue-400 truncate mt-0.5">
                           Click to initiate SOS or request rescue assistance.
                         </p>
                       </div>
@@ -1082,9 +1122,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                 <div className={`text-xs font-bold truncate ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   Report Disaster
                 </div>
-                <div className="text-[10px] text-slate-400 truncate">Share what you see</div>
+                <div className={`text-[10px] truncate ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Share what you see</div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-rose-500 transition-colors" />
+              <ArrowRight className={`w-3.5 h-3.5 transition-colors ${darkMode ? 'text-slate-400 group-hover:text-rose-400' : 'text-slate-400 group-hover:text-rose-600'}`} />
             </div>
 
             {/* Action 2: Find Safe Zone */}
@@ -1101,9 +1141,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                 <div className={`text-xs font-bold truncate ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   Find Safe Zone
                 </div>
-                <div className="text-[10px] text-slate-400 truncate">Locate nearby safe areas</div>
+                <div className={`text-[10px] truncate ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Locate nearby safe areas</div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors" />
+              <ArrowRight className={`w-3.5 h-3.5 transition-colors ${darkMode ? 'text-slate-400 group-hover:text-blue-400' : 'text-slate-400 group-hover:text-blue-600'}`} />
             </div>
 
             {/* Action 3: Request Rescue */}
@@ -1120,9 +1160,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                 <div className={`text-xs font-bold truncate ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   Request Rescue
                 </div>
-                <div className="text-[10px] text-slate-400 truncate">Get help in emergency</div>
+                <div className={`text-[10px] truncate ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Get help in emergency</div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+              <ArrowRight className={`w-3.5 h-3.5 transition-colors ${darkMode ? 'text-slate-400 group-hover:text-emerald-400' : 'text-slate-400 group-hover:text-emerald-600'}`} />
             </div>
 
             {/* Action 4: Emergency Help */}
@@ -1139,9 +1179,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                 <div className={`text-xs font-bold truncate ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   Emergency Help
                 </div>
-                <div className="text-[10px] text-slate-400 truncate">Call for immediate support</div>
+                <div className={`text-[10px] truncate ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Call for immediate support</div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-purple-500 transition-colors" />
+              <ArrowRight className={`w-3.5 h-3.5 transition-colors ${darkMode ? 'text-slate-400 group-hover:text-purple-400' : 'text-slate-400 group-hover:text-purple-600'}`} />
             </div>
 
           </div>

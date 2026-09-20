@@ -301,15 +301,21 @@ export const CitizenLocationSearch: React.FC<CitizenLocationSearchProps> = ({
 
       {/* Manual Coordinates Fallback Modal / Drawer */}
       {manualFallbackOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 z-500 p-3.5 rounded-2xl bg-slate-950/98 border border-blue-500/50 shadow-2xl text-left space-y-3">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span className="text-xs font-bold text-white flex items-center gap-1.5">
-              <Compass className="w-4 h-4 text-blue-400" />
+        <div className={`absolute top-full left-0 right-0 mt-2 z-500 p-3.5 rounded-2xl border shadow-2xl text-left space-y-3 ${
+          darkMode ? 'bg-slate-950/98 border-blue-500/50' : 'bg-white border-blue-300 shadow-xl'
+        }`}>
+          <div className={`flex items-center justify-between border-b pb-2 ${
+            darkMode ? 'border-slate-800' : 'border-slate-200'
+          }`}>
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${
+              darkMode ? 'text-white' : 'text-slate-900'
+            }`}>
+              <Compass className="w-4 h-4 text-blue-500" />
               Manual Location Entry Fallback
             </span>
             <button
               onClick={() => setManualFallbackOpen(false)}
-              className="text-slate-400 hover:text-white p-1"
+              className="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 cursor-pointer"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -317,7 +323,7 @@ export const CitizenLocationSearch: React.FC<CitizenLocationSearchProps> = ({
 
           <form onSubmit={handleManualSubmit} className="space-y-2.5">
             <div>
-              <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">
+              <label className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 block mb-1">
                 Settlement / Village Name
               </label>
               <input
@@ -325,13 +331,15 @@ export const CitizenLocationSearch: React.FC<CitizenLocationSearchProps> = ({
                 value={manualPlaceName}
                 onChange={(e) => setManualPlaceName(e.target.value)}
                 placeholder="e.g. Mana Village, Helang, Pandukeshwar"
-                className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500"
+                className={`w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-none focus:border-blue-500 ${
+                  darkMode ? 'bg-slate-900 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
+                }`}
               />
             </div>
 
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">
+                <label className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 block mb-1">
                   Latitude (° N)
                 </label>
                 <input
@@ -340,11 +348,13 @@ export const CitizenLocationSearch: React.FC<CitizenLocationSearchProps> = ({
                   onChange={(e) => setManualLat(e.target.value)}
                   placeholder="e.g. 30.5564"
                   required
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500"
+                  className={`w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-none focus:border-blue-500 ${
+                    darkMode ? 'bg-slate-900 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
+                  }`}
                 />
               </div>
               <div>
-                <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">
+                <label className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 block mb-1">
                   Longitude (° E)
                 </label>
                 <input
@@ -353,7 +363,9 @@ export const CitizenLocationSearch: React.FC<CitizenLocationSearchProps> = ({
                   onChange={(e) => setManualLng(e.target.value)}
                   placeholder="e.g. 79.5658"
                   required
-                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500"
+                  className={`w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-none focus:border-blue-500 ${
+                    darkMode ? 'bg-slate-900 border-slate-700 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
+                  }`}
                 />
               </div>
             </div>
@@ -362,7 +374,9 @@ export const CitizenLocationSearch: React.FC<CitizenLocationSearchProps> = ({
               <button
                 type="button"
                 onClick={() => setManualFallbackOpen(false)}
-                className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700 cursor-pointer"
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
+                  darkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
               >
                 Cancel
               </button>

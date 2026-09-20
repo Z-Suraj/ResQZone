@@ -189,9 +189,9 @@ export const CitizenEmergencyHelpView: React.FC<CitizenEmergencyHelpViewProps> =
               darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">National Emergency Number</div>
+                <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>National Emergency Number</div>
                 <div className={`text-lg font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>112</div>
-                <div className="text-[11px] text-slate-400">Police / Fire / Ambulance Unified</div>
+                <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Police / Fire / Ambulance Unified</div>
               </div>
               <a
                 href="tel:112"
@@ -206,9 +206,9 @@ export const CitizenEmergencyHelpView: React.FC<CitizenEmergencyHelpViewProps> =
               darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">NDRF National HQ</div>
+                <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>NDRF National HQ</div>
                 <div className={`text-lg font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>1078</div>
-                <div className="text-[11px] text-slate-400">National Disaster Response Force</div>
+                <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>National Disaster Response Force</div>
               </div>
               <a
                 href="tel:1078"
@@ -223,13 +223,15 @@ export const CitizenEmergencyHelpView: React.FC<CitizenEmergencyHelpViewProps> =
               darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">{stateHelpline}</div>
+                <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{stateHelpline}</div>
                 <div className={`text-lg font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>1070</div>
-                <div className="text-[11px] text-slate-400">State Operations Center (24/7)</div>
+                <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>State Operations Center (24/7)</div>
               </div>
               <a
                 href="tel:1070"
-                className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-black text-xs cursor-pointer shadow-xs"
+                className={`px-3.5 py-2 rounded-xl text-white font-black text-xs cursor-pointer shadow-xs ${
+                  darkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-700 hover:bg-slate-800'
+                }`}
               >
                 Dial
               </a>
@@ -240,13 +242,15 @@ export const CitizenEmergencyHelpView: React.FC<CitizenEmergencyHelpViewProps> =
               darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">{districtHelpline}</div>
+                <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{districtHelpline}</div>
                 <div className={`text-lg font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>1077</div>
-                <div className="text-[11px] text-slate-400">District Incident Commander</div>
+                <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>District Incident Commander</div>
               </div>
               <a
                 href="tel:1077"
-                className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-black text-xs cursor-pointer shadow-xs"
+                className={`px-3.5 py-2 rounded-xl text-white font-black text-xs cursor-pointer shadow-xs ${
+                  darkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-700 hover:bg-slate-800'
+                }`}
               >
                 Dial
               </a>
@@ -257,9 +261,9 @@ export const CitizenEmergencyHelpView: React.FC<CitizenEmergencyHelpViewProps> =
               darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">Toll-Free Ambulance</div>
+                <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Toll-Free Ambulance</div>
                 <div className={`text-lg font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>108</div>
-                <div className="text-[11px] text-slate-400">Emergency Medical Transit</div>
+                <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Emergency Medical Transit</div>
               </div>
               <a
                 href="tel:108"
@@ -274,13 +278,15 @@ export const CitizenEmergencyHelpView: React.FC<CitizenEmergencyHelpViewProps> =
               darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
             }`}>
               <div>
-                <div className="text-slate-400 text-[10px] uppercase font-bold">State SDRF Special Ops</div>
+                <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>State SDRF Special Ops</div>
                 <div className={`text-lg font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>0135-2710334</div>
-                <div className="text-[11px] text-slate-400">Tactical Search & Water Rescue</div>
+                <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Tactical Search & Water Rescue</div>
               </div>
               <a
                 href="tel:01352710334"
-                className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-black text-xs cursor-pointer shadow-xs"
+                className={`px-3.5 py-2 rounded-xl text-white font-black text-xs cursor-pointer shadow-xs ${
+                  darkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-700 hover:bg-slate-800'
+                }`}
               >
                 Dial
               </a>

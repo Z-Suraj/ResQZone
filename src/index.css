@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --font-mono: 'JetBrains Mono', monospace;
@@ -54,6 +56,24 @@
 .leaflet-popup-content {
   margin: 12px 14px !important;
   line-height: 1.4 !important;
+}
+
+.leaflet-tooltip {
+  background: rgba(10, 16, 28, 0.95) !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+  border-top-color: rgba(10, 16, 28, 0.95) !important;
+  border-bottom-color: rgba(10, 16, 28, 0.95) !important;
+  border-left-color: rgba(10, 16, 28, 0.95) !important;
+  border-right-color: rgba(10, 16, 28, 0.95) !important;
 }
 
 /* Pulse animation for hazard zones and markers */
@@ -159,4 +179,14 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(56, 189, 248, 0.55);
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

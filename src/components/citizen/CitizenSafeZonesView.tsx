@@ -98,7 +98,7 @@ export const CitizenSafeZonesView: React.FC<CitizenSafeZonesViewProps> = ({
                 <span>Active Anchor: {currentLoc ? currentLoc.name : 'All Regions'}</span>
                 <span className="text-[10px] text-emerald-500 font-mono font-bold">({displayZones.length} shelters verified)</span>
               </div>
-              <div className="text-[11px] text-slate-400">
+              <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                 Sorted by distance from your current coordinate.
               </div>
             </div>
@@ -107,7 +107,7 @@ export const CitizenSafeZonesView: React.FC<CitizenSafeZonesViewProps> = ({
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
             {/* Search Input */}
             <div className="relative flex-1 md:w-56">
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3" />
+              <Search className={`w-3.5 h-3.5 absolute left-3 top-3 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
               <input
                 type="text"
                 value={searchQuery}
@@ -258,8 +258,8 @@ export const CitizenSafeZonesView: React.FC<CitizenSafeZonesViewProps> = ({
                     <div className={`p-2.5 rounded-xl border ${
                       darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                     }`}>
-                      <div className="text-[10px] text-slate-400">Available Space</div>
-                      <div className="font-bold text-emerald-500 mt-0.5">
+                      <div className={`text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}`}>Available Space</div>
+                      <div className="font-bold text-emerald-600 dark:text-emerald-500 mt-0.5">
                         {zone.availableCapacity.toLocaleString()} Beds Open
                       </div>
                     </div>
@@ -267,9 +267,9 @@ export const CitizenSafeZonesView: React.FC<CitizenSafeZonesViewProps> = ({
                     <div className={`p-2.5 rounded-xl border ${
                       darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                     }`}>
-                      <div className="text-[10px] text-slate-400">Road Accessibility</div>
+                      <div className={`text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}`}>Road Accessibility</div>
                       <div className={`font-bold mt-0.5 ${
-                        zone.accessibility === 'EXCELLENT' ? 'text-emerald-500' : 'text-blue-500'
+                        zone.accessibility === 'EXCELLENT' ? 'text-emerald-600 dark:text-emerald-500' : 'text-blue-600 dark:text-blue-500'
                       }`}>
                         {zone.accessibility === 'EXCELLENT' ? 'Paved / Clear' : 'High Clearance OK'}
                       </div>

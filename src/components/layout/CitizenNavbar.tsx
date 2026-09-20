@@ -115,7 +115,7 @@ export const CitizenNavbar: React.FC<CitizenNavbarProps> = ({
             <span className="font-bold text-[11px] leading-tight truncate max-w-[130px]">
               {currentLoc ? currentLoc.name : 'Select Sector'}
             </span>
-            <span className="text-[10px] text-slate-400 font-medium truncate max-w-[130px]">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate max-w-[130px]">
               {currentLoc ? (currentLoc.state || currentLoc.district) : 'India'}
             </span>
           </div>
@@ -148,7 +148,7 @@ export const CitizenNavbar: React.FC<CitizenNavbarProps> = ({
             <span className="font-bold text-[11px] leading-tight">
               {currentLoc ? `${currentLoc.riskLevel} RISK` : 'MONITORING'}
             </span>
-            <span className="text-[10px] text-slate-400 truncate max-w-[90px]">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-[90px]">
               {currentLoc ? currentLoc.name : 'All Regions'}
             </span>
           </div>
@@ -159,7 +159,7 @@ export const CitizenNavbar: React.FC<CitizenNavbarProps> = ({
           darkMode ? 'text-slate-300' : 'text-slate-700'
         }`}>
           <span className="text-xs font-bold tracking-wider leading-tight">{formatTime(currentTime)}</span>
-          <span className="text-[10px] text-slate-400 font-medium">{formatDate(currentTime)}</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{formatDate(currentTime)}</span>
         </div>
 
         {/* Ask AI Safety Assistant */}
@@ -244,7 +244,7 @@ export const CitizenNavbar: React.FC<CitizenNavbarProps> = ({
                 </div>
               </div>
 
-              <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Portal Switch
               </div>
 
@@ -263,7 +263,7 @@ export const CitizenNavbar: React.FC<CitizenNavbarProps> = ({
                 </div>
               </button>
 
-              <div className="border-t border-slate-700/50 my-1.5 pt-1.5 space-y-1">
+              <div className="border-t border-slate-200 dark:border-slate-700/50 my-1.5 pt-1.5 space-y-1">
                 <button
                   onClick={() => {
                     setShowProfileDropdown(false);

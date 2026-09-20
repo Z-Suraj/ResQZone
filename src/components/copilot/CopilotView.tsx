@@ -158,12 +158,12 @@ Ask me anything regarding the current situation in **${ctx.locationName}**, or p
           <div className={`px-4 py-2.5 rounded-2xl border text-xs flex items-center gap-3 backdrop-blur-md ${
             darkMode ? 'bg-slate-900/80 border-slate-800 text-slate-300' : 'bg-white/90 border-slate-200 text-slate-700 shadow-xs'
           }`}>
-            <MapPin className="w-4 h-4 text-cyan-400 shrink-0" />
+            <MapPin className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
             <div>
-              <div className="font-bold text-white font-mono text-[11px] truncate max-w-[200px]">
+              <div className={`font-bold font-mono text-[11px] truncate max-w-[200px] ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                 {grounding.locationName}
               </div>
-              <div className="text-[10px] text-slate-400">
+              <div className={`text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                 {grounding.coordinates[0].toFixed(2)}°N, {grounding.coordinates[1].toFixed(2)}°E &bull; {grounding.weatherWarning} Warning
               </div>
             </div>
@@ -175,25 +175,25 @@ Ask me anything regarding the current situation in **${ctx.locationName}**, or p
           darkMode ? 'bg-slate-950/70 border-slate-800/80 text-slate-300' : 'bg-white/80 border-slate-200 text-slate-700'
         }`}>
           <div className="flex items-center gap-2 font-mono text-[11px]">
-            <Database className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-slate-400">Grounding Context:</span>
-            <span className="font-semibold text-cyan-400">{grounding.habitationsCount} Habitations</span>
+            <Database className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+            <span className={darkMode ? 'text-slate-400' : 'text-slate-500'}>Grounding Context:</span>
+            <span className="font-semibold text-cyan-600 dark:text-cyan-400">{grounding.habitationsCount} Habitations</span>
             <span>&bull;</span>
-            <span className="font-semibold text-amber-400">{grounding.hazardsCount} Hazards</span>
+            <span className="font-semibold text-amber-600 dark:text-amber-400">{grounding.hazardsCount} Hazards</span>
             <span>&bull;</span>
-            <span className="font-semibold text-emerald-400">{grounding.safeZonesCount} Safe Zones</span>
+            <span className="font-semibold text-emerald-600 dark:text-emerald-400">{grounding.safeZonesCount} Safe Zones</span>
             <span>&bull;</span>
-            <span className="font-semibold text-rose-400">{grounding.activeIncidentsCount} Incidents</span>
+            <span className="font-semibold text-rose-600 dark:text-rose-400">{grounding.activeIncidentsCount} Incidents</span>
           </div>
 
-          <div className="flex items-center gap-3 font-mono text-[10px] text-slate-400">
+          <div className={`flex items-center gap-3 font-mono text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
             <span className="flex items-center gap-1">
-              <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
+              <Radio className="w-3 h-3 text-emerald-500 animate-pulse" />
               Source: {grounding.source}
             </span>
             <span>&bull;</span>
             <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3 text-slate-400" />
+              <Clock className={`w-3 h-3 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
               {grounding.lastUpdated}
             </span>
           </div>
@@ -221,8 +221,8 @@ Ask me anything regarding the current situation in **${ctx.locationName}**, or p
 
         {/* Suggested Quick Question Pills */}
         <div className="space-y-1.5">
-          <div className="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5">
-            <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
+          <div className={`text-[11px] font-semibold flex items-center gap-1.5 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <HelpCircle className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Suggested Operational Inquiries:</span>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -267,7 +267,7 @@ Ask me anything regarding the current situation in **${ctx.locationName}**, or p
                         : 'bg-slate-50 border border-slate-200 text-slate-800 rounded-tl-none'
                   }`}
                 >
-                  <div className="whitespace-pre-line prose prose-invert prose-xs max-w-none">
+                  <div className={`whitespace-pre-line prose prose-xs max-w-none ${darkMode ? 'prose-invert' : 'text-slate-800'}`}>
                     {msg.text}
                   </div>
 

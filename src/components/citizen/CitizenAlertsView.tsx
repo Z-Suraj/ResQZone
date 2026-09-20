@@ -94,12 +94,12 @@ export const CitizenAlertsView: React.FC<CitizenAlertsViewProps> = ({ darkMode }
             darkMode ? 'bg-slate-900/80 backdrop-blur-md border-slate-800/80' : 'bg-white/85 backdrop-blur-md border-slate-200/90 shadow-sm'
           }`}>
             <div className="flex items-center gap-2">
-              <Vibrate className={`w-4 h-4 ${settings.emergencyVibration ? 'text-emerald-500' : 'text-slate-400'}`} />
+              <Vibrate className={`w-4 h-4 ${settings.emergencyVibration ? 'text-emerald-500' : darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
               <div className="text-xs">
                 <div className={`font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   Haptic Alert
                 </div>
-                <div className="text-[10px] text-slate-400">Silent Vibration</div>
+                <div className={`text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Silent Vibration</div>
               </div>
             </div>
 
@@ -130,7 +130,9 @@ export const CitizenAlertsView: React.FC<CitizenAlertsViewProps> = ({ darkMode }
 
         {/* Severity Filter Tabs & Policy Banner */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5 p-1 rounded-2xl border bg-slate-900/40 border-slate-800/80">
+          <div className={`flex items-center gap-1.5 p-1 rounded-2xl border ${
+            darkMode ? 'bg-slate-900/40 border-slate-800/80' : 'bg-slate-100/90 border-slate-200'
+          }`}>
             {(['ALL', 'CRITICAL', 'WARNING', 'ADVISORY'] as const).map((sev) => (
               <button
                 key={sev}
@@ -150,8 +152,8 @@ export const CitizenAlertsView: React.FC<CitizenAlertsViewProps> = ({ darkMode }
             ))}
           </div>
 
-          <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
-            <VolumeX className="w-3.5 h-3.5 text-slate-400" />
+          <div className={`text-[11px] flex items-center gap-1.5 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+            <VolumeX className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
             <span>Zero-Disturbance Audio: Visual & Haptic Only</span>
           </div>
         </div>
@@ -215,7 +217,7 @@ export const CitizenAlertsView: React.FC<CitizenAlertsViewProps> = ({ darkMode }
                   </div>
 
                   <div className="flex items-center gap-3 text-xs">
-                    <span className="flex items-center gap-1 text-slate-400">
+                    <span className={`flex items-center gap-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                       <Clock className="w-3.5 h-3.5" />
                       <span>{alert.timestamp}</span>
                     </span>
@@ -252,7 +254,7 @@ export const CitizenAlertsView: React.FC<CitizenAlertsViewProps> = ({ darkMode }
                 {/* Affected Sectors */}
                 {alert.affectedHabitations && alert.affectedHabitations.length > 0 && (
                   <div className="flex flex-wrap items-center gap-1.5 pt-1 text-xs">
-                    <span className="text-slate-400 text-[11px] font-semibold">Affected Sectors:</span>
+                    <span className={`text-[11px] font-semibold ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Affected Sectors:</span>
                     {alert.affectedHabitations.map((hab, idx) => (
                       <span
                         key={idx}

@@ -213,24 +213,24 @@ export const ReportDisasterView: React.FC<ReportDisasterViewProps> = ({
               darkMode ? 'bg-slate-950 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
             }`}>
               <div className="flex justify-between">
-                <span className="text-slate-400">REPORT TRACKING ID:</span>
-                <span className="font-extrabold text-emerald-500">#{submittedReportId}</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>REPORT TRACKING ID:</span>
+                <span className="font-extrabold text-emerald-600 dark:text-emerald-500">#{submittedReportId}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">DISASTER TYPE:</span>
-                <span className="font-bold">{disasterType}</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>DISASTER TYPE:</span>
+                <span className={`font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{disasterType}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">COORDINATES:</span>
-                <span className="font-medium text-blue-400">{coords[0].toFixed(4)}°N, {coords[1].toFixed(4)}°E</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>COORDINATES:</span>
+                <span className="font-medium text-blue-600 dark:text-blue-400">{coords[0].toFixed(4)}°N, {coords[1].toFixed(4)}°E</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">LOCATION:</span>
-                <span className="font-medium truncate max-w-[200px]">{locationText}</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>LOCATION:</span>
+                <span className={`font-medium truncate max-w-[200px] ${darkMode ? 'text-white' : 'text-slate-900'}`}>{locationText}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">INITIAL STATUS:</span>
-                <span className="font-bold text-amber-500">SUBMITTED (PENDING TRIAGE)</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>INITIAL STATUS:</span>
+                <span className="font-bold text-amber-600 dark:text-amber-500">SUBMITTED (PENDING TRIAGE)</span>
               </div>
             </div>
 
@@ -375,26 +375,32 @@ export const ReportDisasterView: React.FC<ReportDisasterViewProps> = ({
 
                   {/* Realistic Field Evidence Defaults */}
                   <div>
-                    <div className="text-[10px] text-slate-400 mb-1 font-semibold">Or pick verified incident category:</div>
+                    <div className={`text-[10px] mb-1 font-semibold ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Or pick verified incident category:</div>
                     <div className="grid grid-cols-3 gap-1.5">
                       <button
                         type="button"
                         onClick={() => { setSelectedPhoto(IMAGES.mountainLandslide); setCustomPhotoUploaded(false); }}
-                        className="text-[10px] p-1.5 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 truncate"
+                        className={`text-[10px] p-1.5 rounded-lg border truncate transition-colors ${
+                          darkMode ? 'border-slate-700 text-slate-300 hover:bg-slate-800' : 'border-slate-300 text-slate-700 bg-white hover:bg-slate-100 shadow-xs'
+                        }`}
                       >
                         Landslide
                       </button>
                       <button
                         type="button"
                         onClick={() => { setSelectedPhoto(IMAGES.himalayanRiverFlood); setCustomPhotoUploaded(false); }}
-                        className="text-[10px] p-1.5 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 truncate"
+                        className={`text-[10px] p-1.5 rounded-lg border truncate transition-colors ${
+                          darkMode ? 'border-slate-700 text-slate-300 hover:bg-slate-800' : 'border-slate-300 text-slate-700 bg-white hover:bg-slate-100 shadow-xs'
+                        }`}
                       >
                         River Flood
                       </button>
                       <button
                         type="button"
                         onClick={() => { setSelectedPhoto(IMAGES.aerialFlood); setCustomPhotoUploaded(false); }}
-                        className="text-[10px] p-1.5 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 truncate"
+                        className={`text-[10px] p-1.5 rounded-lg border truncate transition-colors ${
+                          darkMode ? 'border-slate-700 text-slate-300 hover:bg-slate-800' : 'border-slate-300 text-slate-700 bg-white hover:bg-slate-100 shadow-xs'
+                        }`}
                       >
                         Inundation
                       </button>

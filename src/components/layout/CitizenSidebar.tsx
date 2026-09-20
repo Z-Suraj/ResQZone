@@ -97,7 +97,7 @@ export const CitizenSidebar: React.FC<CitizenSidebarProps> = ({
                   ? isDangerTab
                     ? 'text-rose-500'
                     : darkMode ? 'text-cyan-400' : 'text-blue-600'
-                  : darkMode ? 'text-slate-400 group-hover:text-slate-200' : 'text-slate-400 group-hover:text-slate-600'
+                  : darkMode ? 'text-slate-400 group-hover:text-slate-200' : 'text-slate-500 group-hover:text-slate-900'
               }`} />
 
               {!collapsed && (
@@ -132,7 +132,7 @@ export const CitizenSidebar: React.FC<CitizenSidebarProps> = ({
           }`}
           title={collapsed ? 'Settings' : undefined}
         >
-          <Settings className="w-4 h-4 shrink-0 text-slate-400" />
+          <Settings className={`w-4 h-4 shrink-0 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
           {!collapsed && <span>Settings</span>}
         </button>
 
@@ -168,7 +168,7 @@ export const CitizenSidebar: React.FC<CitizenSidebarProps> = ({
           </button>
 
           {!collapsed && (
-            <div className="text-[10px] font-mono text-slate-400">
+            <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
               ResQZone v2.6 • Public
             </div>
           )}

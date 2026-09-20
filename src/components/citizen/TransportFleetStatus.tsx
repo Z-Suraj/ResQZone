@@ -170,8 +170,10 @@ export const TransportFleetStatus: React.FC<TransportFleetStatusProps> = ({
       </div>
 
       {feedbackMsg && (
-        <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-emerald-200 text-xs flex items-center gap-2 shadow-sm animate-fadeIn">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className={`p-2.5 rounded-xl border text-xs flex items-center gap-2 shadow-sm animate-fadeIn ${
+          darkMode ? 'bg-emerald-950/60 border-emerald-500/50 text-emerald-200' : 'bg-emerald-50 border-emerald-300 text-emerald-900'
+        }`}>
+          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
           <span>{feedbackMsg}</span>
         </div>
       )}
@@ -232,7 +234,7 @@ export const TransportFleetStatus: React.FC<TransportFleetStatusProps> = ({
                   <div className={`text-[11px] mt-1 flex items-center gap-1.5 truncate ${
                     darkMode ? 'text-slate-400' : 'text-slate-600'
                   }`}>
-                    <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                    <MapPin className={`w-3 h-3 shrink-0 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
                     <span className="truncate">{rawItem.pickupLocation}</span>
                   </div>
 
@@ -260,7 +262,7 @@ export const TransportFleetStatus: React.FC<TransportFleetStatusProps> = ({
                   disabled={validated.availableSeats <= 0}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     validated.availableSeats <= 0
-                      ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                      ? darkMode ? 'bg-slate-800 text-slate-500 cursor-not-allowed' : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                       : isReserved
                       ? 'bg-emerald-600 text-white shadow-md'
                       : 'bg-blue-600 hover:bg-blue-500 text-white shadow-md'

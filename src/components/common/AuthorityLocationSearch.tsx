@@ -180,7 +180,7 @@ export const AuthorityLocationSearch: React.FC<AuthorityLocationSearchProps> = (
             <div className={`absolute right-0 mt-1 w-36 rounded-xl border shadow-xl py-1 z-60 ${
               darkMode ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-200 text-slate-800'
             }`}>
-              <div className="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-700/40">
+              <div className="px-3 py-1 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider border-b border-slate-700/40">
                 Radius Filter
               </div>
               {radiusOptions.map((km) => (
@@ -210,7 +210,7 @@ export const AuthorityLocationSearch: React.FC<AuthorityLocationSearchProps> = (
             : 'bg-white/98 border-slate-300 text-slate-900'
         }`}>
           {/* Header */}
-          <div className="px-3 py-2 border-b border-slate-700/40 flex items-center justify-between text-[11px] text-slate-400">
+          <div className="px-3 py-2 border-b border-slate-700/40 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
             <span className="flex items-center gap-1 font-semibold uppercase tracking-wider">
               <Compass className="w-3.5 h-3.5 text-cyan-400" /> Location Geocoding &amp; Spatial Resolver
             </span>
@@ -221,7 +221,7 @@ export const AuthorityLocationSearch: React.FC<AuthorityLocationSearchProps> = (
 
           <div className="max-h-72 overflow-y-auto divide-y divide-slate-800/40">
             {results.length === 0 && !isLoading && query.trim().length >= 2 && (
-              <div className="p-4 text-center text-xs text-slate-400">
+              <div className="p-4 text-center text-xs text-slate-600 dark:text-slate-400">
                 No matching locations found for "{query}". Try a city, district, or pin code (e.g. Haldia, Kolkata, 721604, Mumbai, Delhi).
               </div>
             )}
@@ -269,16 +269,16 @@ export const AuthorityLocationSearch: React.FC<AuthorityLocationSearchProps> = (
                       </span>
                     </div>
 
-                    <p className="text-[11px] text-slate-400 truncate mt-0.5">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 truncate mt-0.5">
                       {loc.subTitle || `${loc.district}, ${loc.state}, ${loc.country}`}
                     </p>
 
-                    <div className="flex items-center gap-3 mt-1 text-[10px] font-mono text-slate-400">
+                    <div className="flex items-center gap-3 mt-1 text-[10px] font-mono text-slate-500 dark:text-slate-400">
                       <span className="flex items-center gap-1">
-                        <Crosshair className="w-3 h-3 text-cyan-400" />
+                        <Crosshair className="w-3.5 h-3.5 text-cyan-400" />
                         {loc.coordinates[0].toFixed(4)}°N, {loc.coordinates[1].toFixed(4)}°E
                       </span>
-                      <span className="truncate text-slate-400">
+                      <span className="truncate text-slate-500 dark:text-slate-400">
                         {loc.district} • {loc.state}
                       </span>
                     </div>
@@ -295,8 +295,10 @@ export const AuthorityLocationSearch: React.FC<AuthorityLocationSearchProps> = (
           </div>
 
           {/* Quick preset selector for key Indian operations */}
-          <div className="p-2 border-t border-slate-700/40 bg-slate-950/40 flex items-center gap-1.5 flex-wrap text-[10px]">
-            <span className="text-slate-400 font-semibold uppercase text-[9px] mr-1">Quick Sectors:</span>
+          <div className={`p-2 border-t flex items-center gap-1.5 flex-wrap text-[10px] ${
+            darkMode ? 'border-slate-700/40 bg-slate-950/40' : 'border-slate-200 bg-slate-50'
+          }`}>
+            <span className="text-slate-500 dark:text-slate-400 font-semibold uppercase text-[9px] mr-1">Quick Sectors:</span>
             {['Haldia', 'Kolkata', 'Mumbai', 'Delhi', 'Chamoli', 'Siliguri'].map((preset) => (
               <button
                 key={preset}

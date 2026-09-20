@@ -291,10 +291,10 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
           </div>
 
           {/* Granular Filters Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-800/60">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-200 dark:border-slate-800/60">
             {/* Risk filter */}
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                 Risk Status
               </label>
               <select
@@ -314,7 +314,7 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
 
             {/* Evacuation Urgency */}
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                 Evacuation Urgency
               </label>
               <select
@@ -334,7 +334,7 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
 
             {/* Social Vulnerability */}
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                 Vulnerability
               </label>
               <select
@@ -354,7 +354,7 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
 
             {/* Capacity Status */}
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                 Capacity Load
               </label>
               <select
@@ -374,7 +374,7 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
         </div>
 
         {/* Results Counter */}
-        <div className="flex items-center justify-between text-xs text-slate-400 px-1 font-mono">
+        <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-mono">
           <span>Displaying {filteredHabitations.length} habitations within {currentRadius} km buffer</span>
           <span>Center: {currentLocation?.coordinates[0].toFixed(3)}°N, {currentLocation?.coordinates[1].toFixed(3)}°E</span>
         </div>
@@ -415,7 +415,7 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
                       <h3 className={`text-base font-bold leading-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                         {hab.name}
                       </h3>
-                      <div className="flex items-center justify-between text-xs mt-1 text-slate-400">
+                      <div className="flex items-center justify-between text-xs mt-1 text-slate-500 dark:text-slate-400">
                         <span className="flex items-center gap-1">
                           <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
                           {hab.district}, {hab.state}
@@ -428,24 +428,24 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
 
                     {/* Key Metrics Grid */}
                     <div className={`grid grid-cols-3 gap-2 py-2 border-y text-xs ${
-                      darkMode ? 'border-slate-800/80' : 'border-slate-100'
+                      darkMode ? 'border-slate-800/80' : 'border-slate-200'
                     }`}>
                       <div>
-                        <div className="text-[10px] text-slate-400">Population</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">Population</div>
                         <div className={`font-bold font-mono mt-0.5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                           {hab.population.toLocaleString()}
                         </div>
                       </div>
                       <div>
-                        <div className="text-[10px] text-slate-400">Special Needs</div>
-                        <div className="font-bold text-amber-400 font-mono mt-0.5 flex items-center gap-1">
-                          <HeartPulse className="w-3 h-3 text-rose-400" />
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">Special Needs</div>
+                        <div className="font-bold text-amber-500 dark:text-amber-400 font-mono mt-0.5 flex items-center gap-1">
+                          <HeartPulse className="w-3 h-3 text-rose-500" />
                           {hab.specialNeedsCount}
                         </div>
                       </div>
                       <div>
-                        <div className="text-[10px] text-slate-400">Livestock</div>
-                        <div className="font-bold text-emerald-400 font-mono mt-0.5 flex items-center gap-1">
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">Livestock</div>
+                        <div className="font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5 flex items-center gap-1">
                           <PawPrint className="w-3 h-3" />
                           {hab.livestockCount}
                         </div>
@@ -455,34 +455,34 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
                     {/* Urgency & Threat Metrics */}
                     <div className="space-y-1.5 text-xs">
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-400 flex items-center gap-1">
-                          <Clock className="w-3 h-3 text-cyan-400" /> Evacuation Urgency:
+                        <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-cyan-500" /> Evacuation Urgency:
                         </span>
                         <span className={`font-bold text-[11px] px-1.5 py-0.5 rounded uppercase ${
                           hab.evacuationUrgency === 'IMMEDIATE'
-                            ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                            ? 'bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                             : hab.evacuationUrgency === 'HIGH'
-                            ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                            : 'bg-cyan-500/10 text-cyan-300'
+                            ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30'
+                            : darkMode ? 'bg-cyan-500/10 text-cyan-300' : 'bg-cyan-50 text-cyan-700 border border-cyan-200'
                         }`}>
                           {hab.evacuationUrgency}
                         </span>
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-400 flex items-center gap-1">
-                          <Waves className="w-3 h-3 text-blue-400" /> Water/Threat:
+                        <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                          <Waves className="w-3 h-3 text-blue-500" /> Water/Threat:
                         </span>
-                        <span className="font-semibold text-slate-300 text-[11px] truncate max-w-[200px]" title={hab.waterLevelMetric}>
+                        <span className="font-semibold text-slate-700 dark:text-slate-300 text-[11px] truncate max-w-[200px]" title={hab.waterLevelMetric}>
                           {hab.waterLevelMetric}
                         </span>
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-400 flex items-center gap-1">
-                          <Truck className="w-3 h-3 text-amber-400" /> Road Access:
+                        <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                          <Truck className="w-3 h-3 text-amber-500" /> Road Access:
                         </span>
-                        <span className="text-[11px] text-slate-300 truncate max-w-[200px]" title={hab.roadStatus}>
+                        <span className="text-[11px] text-slate-700 dark:text-slate-300 truncate max-w-[200px]" title={hab.roadStatus}>
                           {hab.roadStatus}
                         </span>
                       </div>
@@ -492,11 +492,11 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
                     <div className={`p-2.5 rounded-xl border text-[11px] space-y-1 ${
                       darkMode ? 'bg-slate-950/60 border-slate-800/80' : 'bg-slate-50 border-slate-200'
                     }`}>
-                      <div className="font-semibold text-rose-400 flex items-center gap-1.5">
+                      <div className="font-semibold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
                         <ShieldAlert className="w-3.5 h-3.5" />
                         <span>Action Directive:</span>
                       </div>
-                      <p className={`line-clamp-2 leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                      <p className={`line-clamp-2 leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                         {hab.recommendedAction}
                       </p>
                     </div>
@@ -559,36 +559,36 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
                       }`}
                     >
                       <td className="p-3.5">
-                        <div className="font-bold text-white">{hab.name}</div>
-                        <div className="text-[10px] text-slate-400 font-mono">
+                        <div className="font-bold text-slate-900 dark:text-white">{hab.name}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                           {hab.coordinates[0].toFixed(3)}°N, {hab.coordinates[1].toFixed(3)}°E
                         </div>
                       </td>
-                      <td className="p-3.5 font-mono font-bold text-cyan-400">
+                      <td className="p-3.5 font-mono font-bold text-cyan-600 dark:text-cyan-400">
                         {hab.distanceKm.toFixed(1)} km
                       </td>
                       <td className="p-3.5 space-y-1">
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded block w-fit ${
-                          hab.riskLevel === 'CRITICAL' ? 'bg-rose-500/20 text-rose-400' :
-                          hab.riskLevel === 'HIGH' ? 'bg-amber-500/20 text-amber-400' :
-                          'bg-emerald-500/20 text-emerald-400'
+                          hab.riskLevel === 'CRITICAL' ? 'bg-rose-500/20 text-rose-600 dark:text-rose-400' :
+                          hab.riskLevel === 'HIGH' ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400' :
+                          'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400'
                         }`}>
                           {hab.riskLevel} ({hab.riskScore})
                         </span>
-                        <span className="text-[10px] text-slate-400 uppercase font-mono block">
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-mono block">
                           Urgency: {hab.evacuationUrgency}
                         </span>
                       </td>
-                      <td className="p-3.5 font-mono font-bold text-white">
+                      <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
                         {hab.population.toLocaleString()}
                       </td>
-                      <td className="p-3.5 font-mono text-amber-400 font-semibold">
+                      <td className="p-3.5 font-mono text-amber-600 dark:text-amber-400 font-semibold">
                         {hab.specialNeedsCount}
                       </td>
-                      <td className="p-3.5 font-mono text-emerald-400">
+                      <td className="p-3.5 font-mono text-emerald-600 dark:text-emerald-400">
                         {hab.livestockCount}
                       </td>
-                      <td className="p-3.5 text-[11px] text-slate-300 max-w-xs truncate" title={hab.roadStatus}>
+                      <td className="p-3.5 text-[11px] text-slate-700 dark:text-slate-300 max-w-xs truncate" title={hab.roadStatus}>
                         {hab.roadStatus}
                       </td>
                       <td className="p-3.5 text-right">
@@ -620,19 +620,19 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
                 darkMode ? 'border-slate-800' : 'border-slate-100'
               }`}>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 font-mono">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-mono">
                     Operational Settlement Audit
                   </span>
                   <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                     {inspectedHabitation.name}
                   </h3>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     {inspectedHabitation.district}, {inspectedHabitation.state} • Coordinates: {inspectedHabitation.coordinates[0]}°N, {inspectedHabitation.coordinates[1]}°E
                   </p>
                 </div>
                 <button
                   onClick={() => setInspectedHabitation(null)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white cursor-pointer"
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -641,20 +641,20 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
               {/* Demographics & Vulnerability breakdown */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                 <div className={`p-2.5 rounded-xl border ${darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-[10px] text-slate-400">Total Population</div>
-                  <div className="font-bold font-mono mt-0.5 text-white">{inspectedHabitation.population.toLocaleString()}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Total Population</div>
+                  <div className="font-bold font-mono mt-0.5 text-slate-900 dark:text-white">{inspectedHabitation.population.toLocaleString()}</div>
                 </div>
                 <div className={`p-2.5 rounded-xl border ${darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-[10px] text-slate-400">Households</div>
-                  <div className="font-bold font-mono mt-0.5 text-white">{inspectedHabitation.households.toLocaleString()}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Households</div>
+                  <div className="font-bold font-mono mt-0.5 text-slate-900 dark:text-white">{inspectedHabitation.households.toLocaleString()}</div>
                 </div>
                 <div className={`p-2.5 rounded-xl border ${darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-[10px] text-slate-400">Children (0-6)</div>
-                  <div className="font-bold text-amber-400 font-mono mt-0.5">{inspectedHabitation.children0_6}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Children (0-6)</div>
+                  <div className="font-bold text-amber-500 dark:text-amber-400 font-mono mt-0.5">{inspectedHabitation.children0_6}</div>
                 </div>
                 <div className={`p-2.5 rounded-xl border ${darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-[10px] text-slate-400">Livestock Count</div>
-                  <div className="font-bold text-emerald-400 font-mono mt-0.5">{(inspectedHabitation as any).livestockCount || 120}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">Livestock Count</div>
+                  <div className="font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">{(inspectedHabitation as any).livestockCount || 120}</div>
                 </div>
               </div>
 
@@ -662,17 +662,17 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
               <div className={`p-3.5 rounded-xl border space-y-2 text-xs ${
                 darkMode ? 'bg-slate-950/70 border-slate-800' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="font-bold text-cyan-400 flex items-center gap-1.5">
+                <div className="font-bold text-cyan-600 dark:text-cyan-400 flex items-center gap-1.5">
                   <AlertTriangle className="w-4 h-4 text-rose-500" />
                   <span>Hazard Inundation &amp; Logistics Overview</span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-300">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700 dark:text-slate-300">
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Threat Level / Water Line:</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Threat Level / Water Line:</span>
                     <span className="font-semibold">{(inspectedHabitation as any).waterLevelMetric || 'Elevated storm surge'}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Road Evacuation Corridor:</span>
+                    <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Road Evacuation Corridor:</span>
                     <span className="font-semibold">{(inspectedHabitation as any).roadStatus || 'Accessible with caution'}</span>
                   </div>
                 </div>
@@ -682,11 +682,11 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
               <div className={`p-3.5 rounded-xl border space-y-1 text-xs ${
                 darkMode ? 'bg-slate-950/70 border-slate-800' : 'bg-slate-50 border-slate-200'
               }`}>
-                <div className="font-bold text-rose-400 flex items-center gap-1.5">
+                <div className="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
                   <ShieldAlert className="w-4 h-4" />
                   <span>Command Center Evacuation Directive</span>
                 </div>
-                <p className="text-slate-300 leading-relaxed">
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
                   {inspectedHabitation.recommendedAction}
                 </p>
               </div>
@@ -694,7 +694,11 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
               <div className="flex items-center gap-3 pt-2">
                 <button
                   onClick={() => setInspectedHabitation(null)}
-                  className="flex-1 py-2.5 rounded-xl font-semibold text-xs border bg-slate-800 hover:bg-slate-700 text-white border-slate-700 cursor-pointer"
+                  className={`flex-1 py-2.5 rounded-xl font-semibold text-xs border cursor-pointer ${
+                    darkMode 
+                      ? 'bg-slate-800 hover:bg-slate-700 text-white border-slate-700' 
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-200'
+                  }`}
                 >
                   Close
                 </button>
@@ -704,7 +708,7 @@ export const HabitationsView: React.FC<HabitationsViewProps> = ({
                     setInspectedHabitation(null);
                     onNavigateTab('relocation');
                   }}
-                  className="flex-1 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-cyan-950 cursor-pointer"
+                  className="flex-1 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-cyan-950/20 cursor-pointer"
                 >
                   <Navigation className="w-4 h-4" />
                   <span>Initiate Evacuation Route</span>

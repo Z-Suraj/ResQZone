@@ -70,14 +70,14 @@ export const CitizenMyAreaView: React.FC<CitizenMyAreaViewProps> = ({
                 <Compass className="w-8 h-8" />
               </div>
               <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold font-mono">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold font-mono">
                   <span>LOCATION NOT SET</span>
                 </div>
                 <h2 className={`text-2xl sm:text-3xl font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                   Select Your Sector or City
                 </h2>
               </div>
-              <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+              <p className={`text-xs sm:text-sm max-w-md mx-auto leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                 Choose your sector, district, or village using the interactive GIS map or browser GPS to view verified local alerts, evacuation corridors, and designated relief shelters.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -141,8 +141,8 @@ export const CitizenMyAreaView: React.FC<CitizenMyAreaViewProps> = ({
                   }`}>
                     My Local Area: {currentLoc.name}
                   </h1>
-                  <p className={`text-xs sm:text-sm ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-                    District: <span className="font-semibold text-slate-300">{currentLoc.district || currentLoc.name}</span>, State: <span className="font-semibold text-slate-300">{currentLoc.state || 'India'}</span> • Real-time evacuation advisories and shelter capacity.
+                  <p className={`text-xs sm:text-sm ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                    District: <span className={`font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-900'}`}>{currentLoc.district || currentLoc.name}</span>, State: <span className={`font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-900'}`}>{currentLoc.state || 'India'}</span> • Real-time evacuation advisories and shelter capacity.
                   </p>
                 </div>
 
@@ -263,25 +263,25 @@ export const CitizenMyAreaView: React.FC<CitizenMyAreaViewProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                 <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-[11px] text-slate-400 font-semibold">Next Evacuation Bus</div>
-                  <div className="text-sm font-black mt-1 text-emerald-500">15 Minutes (Convoy Unit #04)</div>
-                  <div className="text-[10px] text-slate-400 mt-1">Capacity: 45 Passengers • Priority for Elders & Kids</div>
+                  <div className={`text-[11px] font-semibold ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Next Evacuation Bus</div>
+                  <div className="text-sm font-black mt-1 text-emerald-600 dark:text-emerald-500">15 Minutes (Convoy Unit #04)</div>
+                  <div className={`text-[10px] mt-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Capacity: 45 Passengers • Priority for Elders & Kids</div>
                 </div>
 
                 <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-[11px] text-slate-400 font-semibold">Assembly Staging Point</div>
+                  <div className={`text-[11px] font-semibold ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Assembly Staging Point</div>
                   <div className={`text-sm font-black mt-1 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                     {currentLoc.name} Civic Grounds
                   </div>
-                  <div className="text-[10px] text-slate-400 mt-1">Marked with High-Visibility Emergency Banners</div>
+                  <div className={`text-[10px] mt-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Marked with High-Visibility Emergency Banners</div>
                 </div>
 
                 <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-[11px] text-slate-400 font-semibold">Destination Relief Center</div>
-                  <div className="text-sm font-black mt-1 text-emerald-500 truncate">
+                  <div className={`text-[11px] font-semibold ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Destination Relief Center</div>
+                  <div className="text-sm font-black mt-1 text-emerald-600 dark:text-emerald-500 truncate">
                     {nearestShelter ? nearestShelter.name : 'State Disaster Relief Camp'}
                   </div>
-                  <div className="text-[10px] text-slate-400 mt-1">SDRF Escorted Safe Corridor</div>
+                  <div className={`text-[10px] mt-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>SDRF Escorted Safe Corridor</div>
                 </div>
               </div>
             </div>
@@ -305,7 +305,7 @@ export const CitizenMyAreaView: React.FC<CitizenMyAreaViewProps> = ({
                     <div className={`font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                       Duty Disaster Officer ({currentLoc.name} Sector)
                     </div>
-                    <div className="text-slate-400 text-[11px]">On duty at civic assembly post</div>
+                    <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>On duty at civic assembly post</div>
                   </div>
                   <a
                     href="tel:112"
@@ -322,7 +322,7 @@ export const CitizenMyAreaView: React.FC<CitizenMyAreaViewProps> = ({
                     <div className={`font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                       State Emergency Operations Center
                     </div>
-                    <div className="text-slate-400 text-[11px]">National & Regional 24/7 Dispatch Control</div>
+                    <div className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>National & Regional 24/7 Dispatch Control</div>
                   </div>
                   <a
                     href="tel:112"

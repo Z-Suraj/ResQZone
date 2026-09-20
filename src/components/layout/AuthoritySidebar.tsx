@@ -100,9 +100,9 @@ export const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({
               <Icon className={`w-4 h-4 shrink-0 transition-transform ${
                 isActive 
                   ? isDangerTab
-                    ? 'text-rose-400 scale-110'
-                    : 'text-cyan-400 scale-110'
-                  : 'text-slate-400 group-hover:text-slate-200'
+                    ? darkMode ? 'text-rose-400 scale-110' : 'text-rose-600 scale-110'
+                    : darkMode ? 'text-cyan-400 scale-110' : 'text-blue-600 scale-110'
+                  : darkMode ? 'text-slate-400 group-hover:text-slate-200' : 'text-slate-500 group-hover:text-slate-800'
               }`} />
 
               {!collapsed && (
@@ -148,7 +148,7 @@ export const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({
               <UserCheck className="w-4 h-4 text-emerald-500" />
               <span>Preview Citizen Portal</span>
             </div>
-            <span className="text-[10px] text-slate-400">→</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400">→</span>
           </button>
         )}
 
@@ -164,7 +164,7 @@ export const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({
           </button>
 
           {!collapsed && (
-            <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400">
+            <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 dark:text-slate-400">
               <ResQZoneLogo variant="symbol" size="xs" theme={darkMode ? 'dark' : 'light'} />
               <span>SEOC Command</span>
             </div>

@@ -44,8 +44,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ darkMode }) => {
 
       <div className="relative z-10 p-4 sm:p-6 space-y-6 max-w-4xl w-full mx-auto">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-500/20 border border-slate-500/30 text-slate-300 text-xs font-semibold mb-2 font-mono">
-            <Settings className="w-3.5 h-3.5 text-slate-300" />
+          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-semibold mb-2 font-mono ${
+            darkMode ? 'bg-slate-500/20 border-slate-500/30 text-slate-300' : 'bg-slate-100 border-slate-300 text-slate-700'
+          }`}>
+            <Settings className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`} />
             <span>COMMAND CONSOLE &bull; SYSTEM CONFIGURATION</span>
           </div>
           <h1 className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${

@@ -216,8 +216,8 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
 
         {/* Scenario Presets Row */}
         <div className="space-y-2">
-          <div className="text-xs font-bold font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
+          <div className="text-xs font-bold font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+            <Zap className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
             <span>Rapid Stress-Test Presets:</span>
           </div>
 
@@ -265,9 +265,11 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
             <div className={`rounded-2xl border p-5 space-y-5 backdrop-blur-md ${
               darkMode ? 'bg-slate-900/85 border-slate-800' : 'bg-white/90 border-slate-200 shadow-sm'
             }`}>
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className={`flex items-center justify-between pb-3 border-b ${
+                darkMode ? 'border-slate-800' : 'border-slate-200'
+              }`}>
                 <div className="flex items-center gap-2">
-                  <SlidersHorizontal className="w-4 h-4 text-purple-400" />
+                  <SlidersHorizontal className="w-4 h-4 text-purple-500 dark:text-purple-400" />
                   <h2 className={`text-sm font-bold tracking-wide uppercase font-mono ${
                     darkMode ? 'text-white' : 'text-slate-900'
                   }`}>
@@ -276,7 +278,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 </div>
                 <button
                   onClick={handleReset}
-                  className="text-xs text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
+                  className="text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset Controls</span>
@@ -301,7 +303,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                   step="10"
                   value={params.rainfallPercent}
                   onChange={(e) => handleUpdateParam('rainfallPercent', Number(e.target.value))}
-                  className="w-full accent-blue-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+                  className="w-full accent-blue-500 cursor-pointer h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg"
                 />
                 <div className="flex justify-between text-[10px] text-slate-500 font-mono">
                   <span>-20% (Dry)</span>
@@ -328,7 +330,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                   step="0.1"
                   value={params.hazardMultiplier}
                   onChange={(e) => handleUpdateParam('hazardMultiplier', Number(e.target.value))}
-                  className="w-full accent-rose-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+                  className="w-full accent-rose-500 cursor-pointer h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg"
                 />
                 <div className="flex justify-between text-[10px] text-slate-500 font-mono">
                   <span>1.0x (Standard)</span>
@@ -355,7 +357,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                   step="5"
                   value={params.populationSurgePercent}
                   onChange={(e) => handleUpdateParam('populationSurgePercent', Number(e.target.value))}
-                  className="w-full accent-amber-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+                  className="w-full accent-amber-500 cursor-pointer h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg"
                 />
                 <div className="flex justify-between text-[10px] text-slate-500 font-mono">
                   <span>0% (Baseline)</span>
@@ -395,11 +397,13 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
               </div>
 
               {/* Toggle 5: Railway Corridor Closure */}
-              <div className="flex items-center justify-between p-3 rounded-xl border border-slate-800/80 bg-slate-950/40">
+              <div className={`flex items-center justify-between p-3 rounded-xl border ${
+                darkMode ? 'border-slate-800/80 bg-slate-950/40' : 'border-slate-200 bg-slate-50'
+              }`}>
                 <div className="flex items-center gap-2">
-                  <Train className={`w-4 h-4 ${params.railwayClosed ? 'text-rose-400' : 'text-slate-400'}`} />
+                  <Train className={`w-4 h-4 ${params.railwayClosed ? 'text-rose-500' : 'text-slate-400'}`} />
                   <div>
-                    <div className="text-xs font-bold">Railway Evacuation Corridor</div>
+                    <div className={`text-xs font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Railway Evacuation Corridor</div>
                     <div className="text-[10px] text-slate-500">Simulate trackbed submersion and derailment hazard</div>
                   </div>
                 </div>
@@ -408,7 +412,9 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                   className={`px-3 py-1 rounded-lg text-xs font-bold font-mono transition-colors cursor-pointer ${
                     params.railwayClosed
                       ? 'bg-rose-600 text-white shadow-sm'
-                      : 'bg-slate-800 text-slate-400 hover:text-white'
+                      : darkMode
+                      ? 'bg-slate-800 text-slate-400 hover:text-white'
+                      : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
                   }`}
                 >
                   {params.railwayClosed ? 'SEVERED' : 'OPEN'}
@@ -433,7 +439,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                   step="10"
                   value={params.safeZoneCapacityDeltaPercent}
                   onChange={(e) => handleUpdateParam('safeZoneCapacityDeltaPercent', Number(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+                  className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg"
                 />
                 <div className="flex justify-between text-[10px] text-slate-500 font-mono">
                   <span>-50% (Damaged Shelters)</span>
@@ -460,7 +466,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                   step="10"
                   value={params.availableFleetDeltaPercent}
                   onChange={(e) => handleUpdateParam('availableFleetDeltaPercent', Number(e.target.value))}
-                  className="w-full accent-cyan-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
+                  className="w-full accent-cyan-500 cursor-pointer h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg"
                 />
                 <div className="flex justify-between text-[10px] text-slate-500 font-mono">
                   <span>-50% (Shortage)</span>
@@ -522,17 +528,17 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 <div className={`p-3.5 rounded-xl border space-y-1.5 ${
                   darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="text-[10px] font-mono uppercase text-slate-400">Risk Score</div>
+                  <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400">Risk Score</div>
                   <div className="flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-slate-400">{baseline.averageRiskScore}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
+                    <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{baseline.averageRiskScore}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                     <span className={`text-base font-extrabold font-mono ${
-                      projection.projectedRiskScore >= 8.0 ? 'text-rose-400' : 'text-amber-400'
+                      projection.projectedRiskScore >= 8.0 ? 'text-rose-600 dark:text-rose-400' : 'text-amber-600 dark:text-amber-400'
                     }`}>
                       {projection.projectedRiskScore} / 10
                     </span>
                   </div>
-                  <div className="text-[10px] text-rose-400 font-semibold">
+                  <div className="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">
                     +{ (projection.projectedRiskScore - baseline.averageRiskScore).toFixed(1) } Escalation
                   </div>
                 </div>
@@ -541,15 +547,15 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 <div className={`p-3.5 rounded-xl border space-y-1.5 ${
                   darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="text-[10px] font-mono uppercase text-slate-400">Affected Population</div>
+                  <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400">Affected Population</div>
                   <div className="flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-slate-400">{baseline.totalExposedPopulation.toLocaleString()}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
-                    <span className="text-base font-extrabold font-mono text-purple-400">
+                    <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{baseline.totalExposedPopulation.toLocaleString()}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                    <span className="text-base font-extrabold font-mono text-purple-600 dark:text-purple-400">
                       {projection.projectedExposedPopulation.toLocaleString()}
                     </span>
                   </div>
-                  <div className="text-[10px] text-purple-400 font-semibold">
+                  <div className="text-[10px] text-purple-600 dark:text-purple-400 font-semibold">
                     +{projection.exposedPopulationDelta.toLocaleString()} Surge
                   </div>
                 </div>
@@ -558,18 +564,18 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 <div className={`p-3.5 rounded-xl border space-y-1.5 ${
                   darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="text-[10px] font-mono uppercase text-slate-400">Shelter Capacity Status</div>
+                  <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400">Shelter Capacity Status</div>
                   <div className="flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-emerald-400">+{baseline.availableCapacity} Free</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
+                    <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">+{baseline.availableCapacity} Free</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                     <span className={`text-base font-extrabold font-mono ${
-                      projection.netCapacityDeficit > 0 ? 'text-rose-400' : 'text-emerald-400'
+                      projection.netCapacityDeficit > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'
                     }`}>
                       {projection.netCapacityDeficit > 0 ? `-${projection.netCapacityDeficit}` : 'Adequate'}
                     </span>
                   </div>
                   <div className={`text-[10px] font-semibold ${
-                    projection.netCapacityDeficit > 0 ? 'text-rose-400' : 'text-emerald-400'
+                    projection.netCapacityDeficit > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'
                   }`}>
                     {projection.netCapacityDeficit > 0 ? 'Bed Space Deficit' : 'Surplus Maintained'}
                   </div>
@@ -579,15 +585,15 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 <div className={`p-3.5 rounded-xl border space-y-1.5 ${
                   darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="text-[10px] font-mono uppercase text-slate-400">Open Corridors</div>
+                  <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400">Open Corridors</div>
                   <div className="flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-slate-400">{baseline.openCorridorsCount} of {baseline.totalCorridorsCount}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
-                    <span className="text-base font-extrabold font-mono text-orange-400">
+                    <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{baseline.openCorridorsCount} of {baseline.totalCorridorsCount}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                    <span className="text-base font-extrabold font-mono text-orange-600 dark:text-orange-400">
                       {projection.projectedOpenCorridors} Open
                     </span>
                   </div>
-                  <div className="text-[10px] text-orange-400 font-semibold">
+                  <div className="text-[10px] text-orange-600 dark:text-orange-400 font-semibold">
                     {params.closedRoadsCount} Severed Corridors
                   </div>
                 </div>
@@ -596,17 +602,17 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 <div className={`p-3.5 rounded-xl border space-y-1.5 ${
                   darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="text-[10px] font-mono uppercase text-slate-400">Convoy Fleet Shortage</div>
+                  <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400">Convoy Fleet Shortage</div>
                   <div className="flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-slate-400">{baseline.availableFleetUnits} Buses</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
+                    <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{baseline.availableFleetUnits} Buses</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                     <span className={`text-base font-extrabold font-mono ${
-                      projection.projectedFleetDeficit > 0 ? 'text-rose-400' : 'text-emerald-400'
+                      projection.projectedFleetDeficit > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'
                     }`}>
                       {projection.projectedFleetDeficit > 0 ? `-${projection.projectedFleetDeficit}` : '0'}
                     </span>
                   </div>
-                  <div className="text-[10px] text-slate-400 font-semibold">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
                     {projection.projectedFleetDeficit > 0 ? 'Vehicles Deficit' : 'Sufficient Fleet'}
                   </div>
                 </div>
@@ -615,15 +621,15 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 <div className={`p-3.5 rounded-xl border space-y-1.5 ${
                   darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="text-[10px] font-mono uppercase text-slate-400">Clearance Window</div>
+                  <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400">Clearance Window</div>
                   <div className="flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-slate-400">{baseline.estimatedClearanceHours} hrs</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
-                    <span className="text-base font-extrabold font-mono text-cyan-400">
+                    <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{baseline.estimatedClearanceHours} hrs</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                    <span className="text-base font-extrabold font-mono text-cyan-600 dark:text-cyan-400">
                       {projection.projectedClearanceHours} hrs
                     </span>
                   </div>
-                  <div className="text-[10px] text-cyan-400 font-semibold">
+                  <div className="text-[10px] text-cyan-600 dark:text-cyan-400 font-semibold">
                     +{projection.clearanceHoursDelta} hrs Transit Delay
                   </div>
                 </div>
@@ -631,16 +637,18 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
 
               {/* Blocked Routes List */}
               {projection.blockedCorridors.length > 0 && (
-                <div className="p-3 rounded-xl border border-rose-900/60 bg-rose-950/20 space-y-2">
-                  <div className="text-xs font-bold text-rose-300 flex items-center gap-1.5 font-mono">
-                    <XCircle className="w-3.5 h-3.5 text-rose-400" />
+                <div className={`p-3 rounded-xl border space-y-2 ${
+                  darkMode ? 'border-rose-900/60 bg-rose-950/20' : 'border-rose-200 bg-rose-50'
+                }`}>
+                  <div className="text-xs font-bold text-rose-600 dark:text-rose-300 flex items-center gap-1.5 font-mono">
+                    <XCircle className="w-3.5 h-3.5 text-rose-500 dark:text-rose-400" />
                     <span>Projected Evacuation Route Severances:</span>
                   </div>
                   <div className="space-y-1.5 text-xs">
                     {projection.blockedCorridors.map((c, idx) => (
-                      <div key={idx} className="flex items-center justify-between text-[11px] text-slate-300">
-                        <span className="font-semibold text-white">&bull; {c.name}</span>
-                        <span className="text-rose-400 font-mono text-[10px]">[{c.reason}]</span>
+                      <div key={idx} className="flex items-center justify-between text-[11px] text-slate-700 dark:text-slate-300">
+                        <span className="font-semibold text-slate-900 dark:text-white">&bull; {c.name}</span>
+                        <span className="text-rose-600 dark:text-rose-400 font-mono text-[10px]">[{c.reason}]</span>
                       </div>
                     ))}
                   </div>
@@ -654,7 +662,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
             }`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-purple-400" />
+                  <BarChart3 className="w-4 h-4 text-purple-500 dark:text-purple-400" />
                   <h3 className={`text-xs font-bold uppercase font-mono tracking-wider ${
                     darkMode ? 'text-white' : 'text-slate-900'
                   }`}>
@@ -664,11 +672,11 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                 <div className="flex items-center gap-4 text-[11px] font-mono">
                   <div className="flex items-center gap-1.5">
                     <span className="w-3 h-3 rounded-xs bg-sky-400" />
-                    <span className="text-slate-400">Baseline Real</span>
+                    <span className="text-slate-600 dark:text-slate-400">Baseline Real</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-3 h-3 rounded-xs bg-pink-500" />
-                    <span className="text-slate-400">Simulated Shock</span>
+                    <span className="text-slate-600 dark:text-slate-400">Simulated Shock</span>
                   </div>
                 </div>
               </div>
@@ -728,15 +736,17 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
                       onClick={() => setActiveTimelineHour(step.timeOffsetHours)}
                       className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                         isActive
-                          ? 'bg-cyan-600/20 border-cyan-400 ring-1 ring-cyan-400 text-white shadow-sm'
+                          ? darkMode
+                            ? 'bg-cyan-600/20 border-cyan-400 ring-1 ring-cyan-400 text-white shadow-sm'
+                            : 'bg-cyan-50 border-cyan-500 ring-1 ring-cyan-500 text-cyan-950 shadow-sm'
                           : darkMode
                           ? 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-white'
-                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900'
+                          : 'bg-slate-50 border-slate-200 text-slate-700 hover:text-slate-900'
                       }`}
                     >
-                      <div className="text-[11px] font-bold font-mono text-cyan-300">{step.hourLabel}</div>
-                      <div className="text-xs font-extrabold mt-1">Water Delta: +{step.waterLevelDeltaM}m</div>
-                      <div className="text-[10px] text-slate-400 mt-0.5">
+                      <div className="text-[11px] font-bold font-mono text-cyan-600 dark:text-cyan-300">{step.hourLabel}</div>
+                      <div className="text-xs font-extrabold mt-1 text-slate-900 dark:text-white">Water Delta: +{step.waterLevelDeltaM}m</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
                         Evacuated: {step.evacuatedCount.toLocaleString()} ({Math.round((step.evacuatedCount / projection.projectedExposedPopulation) * 100)}%)
                       </div>
                     </button>
@@ -750,7 +760,7 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
               darkMode ? 'bg-slate-900/85 border-slate-800' : 'bg-white/90 border-slate-200 shadow-sm'
             }`}>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
                 <h3 className={`text-xs font-bold uppercase font-mono tracking-wider ${
                   darkMode ? 'text-white' : 'text-slate-900'
                 }`}>
@@ -760,8 +770,10 @@ export const SimulationSandboxView: React.FC<SimulationSandboxViewProps> = ({
 
               <div className="space-y-2 text-xs">
                 {projection.recommendedMitigations.map((m, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5 p-2.5 rounded-xl border border-slate-800/60 bg-slate-950/40 text-slate-200">
-                    <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[10px] shrink-0 font-mono">
+                  <div key={idx} className={`flex items-start gap-2.5 p-2.5 rounded-xl border ${
+                    darkMode ? 'border-slate-800/60 bg-slate-950/40 text-slate-200' : 'border-slate-200 bg-slate-50 text-slate-800'
+                  }`}>
+                    <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-[10px] shrink-0 font-mono">
                       {idx + 1}
                     </span>
                     <div className="leading-relaxed">{m}</div>

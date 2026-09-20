@@ -175,33 +175,33 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
               darkMode ? 'bg-slate-950 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
             }`}>
               <div className="flex justify-between items-center">
-                <span className="text-slate-400">ASSIGNED UNIT:</span>
-                <span className="font-extrabold text-emerald-500">{submittedRequest.assignedTeam}</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>ASSIGNED UNIT:</span>
+                <span className="font-extrabold text-emerald-600 dark:text-emerald-400">{submittedRequest.assignedTeam}</span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-slate-400">ESTIMATED ARRIVAL:</span>
-                <span className="font-black text-rose-500 flex items-center gap-1">
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>ESTIMATED ARRIVAL:</span>
+                <span className="font-black text-rose-600 dark:text-rose-400 flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5" />
                   <span>{submittedRequest.estimatedArrivalMinutes} Minutes</span>
                 </span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-slate-400">TRANSIT DESTINATION:</span>
-                <span className="font-semibold text-emerald-400 truncate max-w-[200px]">{destinationShelter}</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>TRANSIT DESTINATION:</span>
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400 truncate max-w-[200px]">{destinationShelter}</span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-slate-400">PERSONS TO EVACUATE:</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>PERSONS TO EVACUATE:</span>
                 <span className="font-bold">
                   {adults + children + elderlyOrSpecialCare} Total ({adults} Adults, {children} Kids, {elderlyOrSpecialCare} Special Care)
                 </span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-slate-400">YOUR CONTACT:</span>
-                <span className="font-mono text-emerald-400">{contactPhone || 'Registered Citizen Phone'}</span>
+                <span className={darkMode ? 'text-slate-400' : 'text-slate-500 font-medium'}>YOUR CONTACT:</span>
+                <span className="font-mono text-emerald-600 dark:text-emerald-400">{contactPhone || 'Registered Citizen Phone'}</span>
               </div>
             </div>
 
@@ -351,7 +351,7 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
                     <div className={`text-xs font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                       {veh.label}
                     </div>
-                    <div className="text-[10px] text-slate-400 truncate">{veh.desc}</div>
+                    <div className={`text-[10px] truncate ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{veh.desc}</div>
                   </button>
                 ))}
               </div>
@@ -364,12 +364,14 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
               </label>
               <div className="grid grid-cols-3 gap-3 text-center text-xs">
                 <div className={`p-3 rounded-2xl border ${darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-slate-400 text-[10px] uppercase font-bold">Adults</div>
+                  <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Adults</div>
                   <div className="flex items-center justify-center gap-3 mt-2">
                     <button
                       type="button"
                       onClick={() => setAdults(Math.max(1, adults - 1))}
-                      className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 cursor-pointer"
+                      className={`w-7 h-7 rounded-lg font-bold cursor-pointer transition-colors ${
+                        darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'
+                      }`}
                     >
                       -
                     </button>
@@ -379,7 +381,9 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
                     <button
                       type="button"
                       onClick={() => setAdults(adults + 1)}
-                      className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 cursor-pointer"
+                      className={`w-7 h-7 rounded-lg font-bold cursor-pointer transition-colors ${
+                        darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'
+                      }`}
                     >
                       +
                     </button>
@@ -387,12 +391,14 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
                 </div>
 
                 <div className={`p-3 rounded-2xl border ${darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-slate-400 text-[10px] uppercase font-bold">Children (0-12)</div>
+                  <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Children (0-12)</div>
                   <div className="flex items-center justify-center gap-3 mt-2">
                     <button
                       type="button"
                       onClick={() => setChildren(Math.max(0, children - 1))}
-                      className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 cursor-pointer"
+                      className={`w-7 h-7 rounded-lg font-bold cursor-pointer transition-colors ${
+                        darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'
+                      }`}
                     >
                       -
                     </button>
@@ -402,7 +408,9 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
                     <button
                       type="button"
                       onClick={() => setChildren(children + 1)}
-                      className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 cursor-pointer"
+                      className={`w-7 h-7 rounded-lg font-bold cursor-pointer transition-colors ${
+                        darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'
+                      }`}
                     >
                       +
                     </button>
@@ -410,12 +418,14 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
                 </div>
 
                 <div className={`p-3 rounded-2xl border ${darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="text-slate-400 text-[10px] uppercase font-bold">Elderly / Medical</div>
+                  <div className={`text-[10px] uppercase font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Elderly / Medical</div>
                   <div className="flex items-center justify-center gap-3 mt-2">
                     <button
                       type="button"
                       onClick={() => setElderlyOrSpecialCare(Math.max(0, elderlyOrSpecialCare - 1))}
-                      className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 cursor-pointer"
+                      className={`w-7 h-7 rounded-lg font-bold cursor-pointer transition-colors ${
+                        darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'
+                      }`}
                     >
                       -
                     </button>
@@ -425,7 +435,9 @@ export const CitizenRescueRequestView: React.FC<CitizenRescueRequestViewProps> =
                     <button
                       type="button"
                       onClick={() => setElderlyOrSpecialCare(elderlyOrSpecialCare + 1)}
-                      className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 cursor-pointer"
+                      className={`w-7 h-7 rounded-lg font-bold cursor-pointer transition-colors ${
+                        darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'
+                      }`}
                     >
                       +
                     </button>

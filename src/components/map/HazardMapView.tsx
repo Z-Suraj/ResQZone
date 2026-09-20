@@ -695,7 +695,7 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
           {/* Top-left: Global Authority Location Search + Entity Filter */}
           <div className="absolute top-3 left-3 z-[1000] flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-[92vw]">
             <AuthorityLocationSearch 
-              darkMode={true} 
+              darkMode={darkMode} 
               compact={true}
               onLocationSelected={(loc) => {
                 if (mapInstanceRef.current) {
@@ -710,14 +710,18 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                 placeholder="Find entity on map..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl bg-slate-950/90 text-white placeholder-slate-400 border border-slate-700/80 backdrop-blur-md shadow-xl focus:outline-hidden focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/40 transition-colors"
+                className={`w-full pl-8 pr-7 py-1.5 text-xs rounded-xl border backdrop-blur-md shadow-xl focus:outline-hidden focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/40 transition-colors ${
+                  darkMode
+                    ? 'bg-slate-950/90 text-white placeholder-slate-400 border-slate-700/80'
+                    : 'bg-white/95 text-slate-900 placeholder-slate-500 border-slate-300'
+                }`}
               />
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2" />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2 top-2 text-slate-400 hover:text-white"
+                  className="absolute right-2 top-2 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -734,16 +738,24 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                   setShowBasemapMenu(!showBasemapMenu);
                   setShowLayerMenu(false);
                 }}
-                className="px-3 py-2 rounded-xl bg-slate-950/90 text-white text-xs font-semibold border border-slate-700/80 backdrop-blur-md shadow-xl flex items-center gap-1.5 hover:bg-slate-900 transition-colors cursor-pointer"
+                className={`px-3 py-2 rounded-xl text-xs font-semibold border backdrop-blur-md shadow-xl flex items-center gap-1.5 transition-colors cursor-pointer ${
+                  darkMode
+                    ? 'bg-slate-950/90 text-white border-slate-700/80 hover:bg-slate-900'
+                    : 'bg-white/95 text-slate-800 border-slate-300 hover:bg-slate-50'
+                }`}
                 title="Select Basemap Cartography"
               >
-                <Layers className="w-4 h-4 text-cyan-400" />
+                <Layers className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
                 <span className="hidden sm:inline">Basemap</span>
               </button>
 
               {showBasemapMenu && (
-                <div className="absolute right-0 mt-1.5 w-56 rounded-2xl bg-slate-950/95 border border-slate-700/90 p-2 shadow-2xl backdrop-blur-xl space-y-1">
-                  <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                <div className={`absolute right-0 mt-1.5 w-56 rounded-2xl border p-2 shadow-2xl backdrop-blur-xl space-y-1 ${
+                  darkMode
+                    ? 'bg-slate-950/95 border-slate-700/90'
+                    : 'bg-white/98 border-slate-300'
+                }`}>
+                  <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
                     Select Cartography
                   </div>
                   {(Object.keys(basemapUrls) as BasemapType[]).map((type) => (
@@ -755,12 +767,16 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                       }}
                       className={`w-full text-left px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between transition-colors cursor-pointer ${
                         currentBasemap === type
-                          ? 'bg-rose-600/20 text-rose-400 font-bold border border-rose-500/30'
-                          : 'text-slate-300 hover:bg-slate-800'
+                          ? darkMode
+                            ? 'bg-rose-600/20 text-rose-400 font-bold border border-rose-500/30'
+                            : 'bg-rose-50 text-rose-700 font-bold border border-rose-300'
+                          : darkMode
+                          ? 'text-slate-300 hover:bg-slate-800'
+                          : 'text-slate-700 hover:bg-slate-100'
                       }`}
                     >
                       <span>{basemapUrls[type].name}</span>
-                      {currentBasemap === type && <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" />}
+                      {currentBasemap === type && <CheckCircle2 className="w-3.5 h-3.5 text-rose-500 dark:text-rose-400" />}
                     </button>
                   ))}
                 </div>
@@ -774,20 +790,26 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                   setShowLayerMenu(!showLayerMenu);
                   setShowBasemapMenu(false);
                 }}
-                className="px-3 py-2 rounded-xl bg-slate-950/90 text-white text-xs font-semibold border border-slate-700/80 backdrop-blur-md shadow-xl flex items-center gap-1.5 hover:bg-slate-900 transition-colors cursor-pointer"
+                className={`px-3 py-2 rounded-xl text-xs font-semibold border backdrop-blur-md shadow-xl flex items-center gap-1.5 transition-colors cursor-pointer ${
+                  darkMode
+                    ? 'bg-slate-950/90 text-white border-slate-700/80 hover:bg-slate-900'
+                    : 'bg-white/95 text-slate-800 border-slate-300 hover:bg-slate-50'
+                }`}
                 title="Toggle GIS Vector Layers"
               >
-                <Filter className="w-4 h-4 text-amber-400" />
+                <Filter className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                 <span className="hidden sm:inline">Layers</span>
               </button>
 
               {showLayerMenu && (
-                <div className="absolute right-0 mt-1.5 w-64 rounded-2xl bg-slate-950/95 border border-slate-700/90 p-3 shadow-2xl backdrop-blur-xl space-y-2">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                <div className={`absolute right-0 mt-1.5 w-64 rounded-2xl border p-3 shadow-2xl backdrop-blur-xl space-y-2 ${
+                  darkMode ? 'bg-slate-950/95 border-slate-700/90' : 'bg-white/98 border-slate-300'
+                }`}>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
                     Active Vector Overlays
                   </div>
 
-                  <label className="flex items-center justify-between text-xs text-slate-200 cursor-pointer">
+                  <label className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-200 cursor-pointer">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                       Hazard Zones (Contours)
@@ -800,7 +822,7 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     />
                   </label>
 
-                  <label className="flex items-center justify-between text-xs text-slate-200 cursor-pointer">
+                  <label className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-200 cursor-pointer">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
                       Habitations (Settlements)
@@ -813,7 +835,7 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     />
                   </label>
 
-                  <label className="flex items-center justify-between text-xs text-slate-200 cursor-pointer">
+                  <label className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-200 cursor-pointer">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
                       Safe Zones &amp; Camps
@@ -826,9 +848,9 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     />
                   </label>
 
-                  <label className="flex items-center justify-between text-xs text-slate-200 cursor-pointer">
+                  <label className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-200 cursor-pointer">
                     <span className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 dark:bg-cyan-400" />
                       Evacuation Corridors
                     </span>
                     <input
@@ -839,7 +861,7 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     />
                   </label>
 
-                  <label className="flex items-center justify-between text-xs text-slate-200 cursor-pointer">
+                  <label className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-200 cursor-pointer">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
                       Citizen Incident Reports
@@ -852,7 +874,7 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     />
                   </label>
 
-                  <label className="flex items-center justify-between text-xs text-slate-200 cursor-pointer">
+                  <label className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-200 cursor-pointer">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse" />
                       Rescue SOS Signals
@@ -871,7 +893,11 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
             {/* Recenter Jurisdiction */}
             <button
               onClick={handleResetToJurisdiction}
-              className="p-2 rounded-xl bg-slate-950/90 text-slate-300 hover:text-white border border-slate-700/80 backdrop-blur-md shadow-xl transition-colors cursor-pointer"
+              className={`p-2 rounded-xl border backdrop-blur-md shadow-xl transition-colors cursor-pointer ${
+                darkMode
+                  ? 'bg-slate-950/90 text-slate-300 hover:text-white border-slate-700/80'
+                  : 'bg-white/95 text-slate-700 hover:text-slate-900 border-slate-300'
+              }`}
               title="Reset to Active Jurisdiction Center"
             >
               <Crosshair className="w-4 h-4" />
@@ -880,7 +906,11 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
             {/* Fullscreen toggle */}
             <button
               onClick={() => setIsFullscreen(!isFullscreen)}
-              className="p-2 rounded-xl bg-slate-950/90 text-slate-300 hover:text-white border border-slate-700/80 backdrop-blur-md shadow-xl transition-colors cursor-pointer"
+              className={`p-2 rounded-xl border backdrop-blur-md shadow-xl transition-colors cursor-pointer ${
+                darkMode
+                  ? 'bg-slate-950/90 text-slate-300 hover:text-white border-slate-700/80'
+                  : 'bg-white/95 text-slate-700 hover:text-slate-900 border-slate-300'
+              }`}
               title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
             >
               {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -888,15 +918,23 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
           </div>
 
           {/* Bottom-left: Coordinates HUD */}
-          <div className="absolute bottom-3 left-3 z-[1000] px-3 py-1.5 rounded-xl bg-slate-950/90 text-slate-300 text-[11px] font-mono border border-slate-700/80 backdrop-blur-md shadow-xl flex items-center gap-3">
-            <span>LAT: <strong className="text-white">{coordinates.lat.toFixed(4)}°N</strong></span>
-            <span>LON: <strong className="text-white">{coordinates.lng.toFixed(4)}°E</strong></span>
-            <span>ZOOM: <strong className="text-cyan-400">{coordinates.zoom}x</strong></span>
-            <span className="hidden sm:inline text-slate-400">| EPSG:4326 WGS84</span>
+          <div className={`absolute bottom-3 left-3 z-[1000] px-3 py-1.5 rounded-xl text-[11px] font-mono border backdrop-blur-md shadow-xl flex items-center gap-3 ${
+            darkMode
+              ? 'bg-slate-950/90 text-slate-300 border-slate-700/80'
+              : 'bg-white/95 text-slate-700 border-slate-300'
+          }`}>
+            <span>LAT: <strong className={darkMode ? 'text-white' : 'text-slate-900'}>{coordinates.lat.toFixed(4)}°N</strong></span>
+            <span>LON: <strong className={darkMode ? 'text-white' : 'text-slate-900'}>{coordinates.lng.toFixed(4)}°E</strong></span>
+            <span>ZOOM: <strong className="text-cyan-600 dark:text-cyan-400">{coordinates.zoom}x</strong></span>
+            <span className="hidden sm:inline text-slate-500 dark:text-slate-400">| EPSG:4326 WGS84</span>
           </div>
 
           {/* Bottom-right: Tactical Map Legend */}
-          <div className="absolute bottom-3 right-3 z-[1000] hidden sm:flex items-center gap-3 px-3 py-1.5 rounded-xl bg-slate-950/90 text-slate-300 text-[11px] font-medium border border-slate-700/80 backdrop-blur-md shadow-xl">
+          <div className={`absolute bottom-3 right-3 z-[1000] hidden sm:flex items-center gap-3 px-3 py-1.5 rounded-xl text-[11px] font-medium border backdrop-blur-md shadow-xl ${
+            darkMode
+              ? 'bg-slate-950/90 text-slate-300 border-slate-700/80'
+              : 'bg-white/95 text-slate-700 border-slate-300'
+          }`}>
             <span className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
               <span>Critical Hazard</span>
@@ -921,9 +959,15 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
 
           {/* Inspector Slide-over Panel (if anything is clicked) */}
           {(inspectedHazard || inspectedHabitation || inspectedSafeZone || inspectedIncident || inspectedRescue) && (
-            <div className="absolute top-14 right-3 z-[1001] w-80 sm:w-96 max-h-[calc(100%-4.5rem)] overflow-y-auto rounded-2xl bg-slate-950/95 border border-slate-700 p-4 shadow-2xl backdrop-blur-xl space-y-3 animate-in fade-in slide-in-from-right-4">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 font-mono">
+            <div className={`absolute top-14 right-3 z-[1001] w-80 sm:w-96 max-h-[calc(100%-4.5rem)] overflow-y-auto rounded-2xl p-4 shadow-2xl backdrop-blur-xl space-y-3 animate-in fade-in slide-in-from-right-4 border ${
+              darkMode
+                ? 'bg-slate-950/95 border-slate-700 text-white'
+                : 'bg-white/98 border-slate-300 text-slate-900'
+            }`}>
+              <div className={`flex items-center justify-between pb-2 border-b ${
+                darkMode ? 'border-slate-800' : 'border-slate-200'
+              }`}>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-500 dark:text-rose-400 font-mono">
                   GIS Element Inspector
                 </span>
                 <button
@@ -934,7 +978,9 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     setInspectedIncident(null);
                     setInspectedRescue(null);
                   }}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                  className={`p-1 rounded-lg ${
+                    darkMode ? 'text-slate-400 hover:text-white hover:bg-slate-800' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -947,24 +993,26 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     <div className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-rose-500/20 text-rose-400 border border-rose-500/30">
                       {inspectedHazard.severity} SEVERITY HAZARD
                     </div>
-                    <h3 className="text-base font-bold text-white mt-1">{inspectedHazard.name}</h3>
-                    <p className="text-slate-400 text-[11px] mt-0.5">{inspectedHazard.type} &bull; Area: {inspectedHazard.affectedAreaSqKm} sq km</p>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{inspectedHazard.name}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] mt-0.5">{inspectedHazard.type} &bull; Area: {inspectedHazard.affectedAreaSqKm} sq km</p>
                   </div>
 
-                  <p className="text-slate-300 leading-relaxed text-[11px]">{inspectedHazard.description}</p>
+                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-[11px]">{inspectedHazard.description}</p>
 
                   <div className="grid grid-cols-2 gap-2 text-[11px]">
-                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
-                      <div className="text-slate-400 text-[10px]">Affected Population</div>
-                      <div className="text-sm font-bold text-white font-mono">{inspectedHazard.affectedPopulation.toLocaleString()}</div>
+                    <div className={`p-2 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px]">Affected Population</div>
+                      <div className="text-sm font-bold text-slate-900 dark:text-white font-mono">{inspectedHazard.affectedPopulation.toLocaleString()}</div>
                     </div>
-                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
-                      <div className="text-slate-400 text-[10px]">Threat Status</div>
-                      <div className="text-sm font-bold text-rose-400">{inspectedHazard.severity === 'CRITICAL' ? 'ACTIVE DANGER' : 'MONITORED'}</div>
+                    <div className={`p-2 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px]">Threat Status</div>
+                      <div className="text-sm font-bold text-rose-500 dark:text-rose-400">{inspectedHazard.severity === 'CRITICAL' ? 'ACTIVE DANGER' : 'MONITORED'}</div>
                     </div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-rose-950/30 border border-rose-800/40 text-rose-300 text-[11px]">
+                  <div className={`p-2.5 rounded-xl text-[11px] border ${
+                    darkMode ? 'bg-rose-950/30 border-rose-800/40 text-rose-300' : 'bg-rose-50 border-rose-200 text-rose-800'
+                  }`}>
                     <strong>Recommended SOP:</strong> {inspectedHazard.recommendedAction}
                   </div>
                 </div>
@@ -977,26 +1025,26 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     <div className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-amber-500/20 text-amber-400 border border-amber-500/30">
                       {inspectedHabitation.riskLevel} RISK (Score: {inspectedHabitation.riskScore})
                     </div>
-                    <h3 className="text-base font-bold text-white mt-1">{inspectedHabitation.name}</h3>
-                    <p className="text-slate-400 text-[11px] mt-0.5">{inspectedHabitation.district}, {inspectedHabitation.state}</p>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{inspectedHabitation.name}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] mt-0.5">{inspectedHabitation.district}, {inspectedHabitation.state}</p>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 text-[11px]">
-                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
-                      <div className="text-slate-400 text-[10px]">Population</div>
-                      <div className="text-xs font-bold text-white font-mono">{inspectedHabitation.population.toLocaleString()}</div>
+                    <div className={`p-2 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px]">Population</div>
+                      <div className="text-xs font-bold text-slate-900 dark:text-white font-mono">{inspectedHabitation.population.toLocaleString()}</div>
                     </div>
-                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
-                      <div className="text-slate-400 text-[10px]">Minors 0-6</div>
-                      <div className="text-xs font-bold text-amber-400 font-mono">{inspectedHabitation.children0_6.toLocaleString()}</div>
+                    <div className={`p-2 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px]">Minors 0-6</div>
+                      <div className="text-xs font-bold text-amber-500 dark:text-amber-400 font-mono">{inspectedHabitation.children0_6.toLocaleString()}</div>
                     </div>
-                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
-                      <div className="text-slate-400 text-[10px]">Capacity Load</div>
-                      <div className="text-xs font-bold text-rose-400 font-mono">{inspectedHabitation.capacityUtilization}%</div>
+                    <div className={`p-2 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px]">Capacity Load</div>
+                      <div className="text-xs font-bold text-rose-500 dark:text-rose-400 font-mono">{inspectedHabitation.capacityUtilization}%</div>
                     </div>
                   </div>
 
-                  <p className="text-slate-300 text-[11px]">
+                  <p className="text-slate-600 dark:text-slate-300 text-[11px]">
                     <strong>Action:</strong> {inspectedHabitation.recommendedAction}
                   </p>
 
@@ -1022,22 +1070,22 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     <div className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                       VERIFIED RELIEF SAFE ZONE
                     </div>
-                    <h3 className="text-base font-bold text-white mt-1">{inspectedSafeZone.name}</h3>
-                    <p className="text-slate-400 text-[11px] mt-0.5">{inspectedSafeZone.district}, {inspectedSafeZone.state}</p>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{inspectedSafeZone.name}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] mt-0.5">{inspectedSafeZone.district}, {inspectedSafeZone.state}</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 text-[11px]">
-                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
-                      <div className="text-slate-400 text-[10px]">Available Headroom</div>
-                      <div className="text-sm font-bold text-emerald-400 font-mono">{inspectedSafeZone.availableCapacity.toLocaleString()} beds</div>
+                    <div className={`p-2 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px]">Available Headroom</div>
+                      <div className="text-sm font-bold text-emerald-500 dark:text-emerald-400 font-mono">{inspectedSafeZone.availableCapacity.toLocaleString()} beds</div>
                     </div>
-                    <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
-                      <div className="text-slate-400 text-[10px]">Total Safe Capacity</div>
-                      <div className="text-sm font-bold text-white font-mono">{inspectedSafeZone.safeCapacity.toLocaleString()} beds</div>
+                    <div className={`p-2 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <div className="text-slate-500 dark:text-slate-400 text-[10px]">Total Safe Capacity</div>
+                      <div className="text-sm font-bold text-slate-900 dark:text-white font-mono">{inspectedSafeZone.safeCapacity.toLocaleString()} beds</div>
                     </div>
                   </div>
 
-                  <div className="text-[11px] text-slate-300">
+                  <div className="text-[11px] text-slate-600 dark:text-slate-300">
                     <div><strong>Facilities:</strong> {inspectedSafeZone.facilities.join(', ')}</div>
                     <div className="mt-1"><strong>Commander:</strong> {inspectedSafeZone.contactPerson} ({inspectedSafeZone.contactPhone})</div>
                   </div>
@@ -1059,21 +1107,21 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     <div className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
                       CITIZEN INCIDENT #{inspectedIncident.id} &bull; {inspectedIncident.status}
                     </div>
-                    <h3 className="text-base font-bold text-white mt-1">{inspectedIncident.title}</h3>
-                    <p className="text-slate-400 text-[11px] mt-0.5">{inspectedIncident.location}</p>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{inspectedIncident.title}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] mt-0.5">{inspectedIncident.location}</p>
                   </div>
 
                   {inspectedIncident.imageUrl && (
-                    <div className="rounded-xl overflow-hidden max-h-32 border border-slate-800">
+                    <div className="rounded-xl overflow-hidden max-h-32 border border-slate-300 dark:border-slate-800">
                       <img src={inspectedIncident.imageUrl} alt={inspectedIncident.title} className="w-full h-full object-cover" />
                     </div>
                   )}
 
-                  <p className="text-slate-300 text-[11px] leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
                     {inspectedIncident.citizenReportText}
                   </p>
 
-                  <div className="text-[10px] text-slate-400">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">
                     Reporter: {inspectedIncident.reporterName} ({inspectedIncident.reporterPhone})
                   </div>
 
@@ -1094,22 +1142,22 @@ export const HazardMapView: React.FC<HazardMapViewProps> = ({
                     <div className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-red-600/20 text-red-400 border border-red-600/40 animate-pulse">
                       🚨 URGENT RESCUE SOS #{inspectedRescue.id}
                     </div>
-                    <h3 className="text-base font-bold text-white mt-1">{inspectedRescue.requesterName}</h3>
-                    <p className="text-slate-400 text-[11px] mt-0.5">{inspectedRescue.locationName}</p>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{inspectedRescue.requesterName}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] mt-0.5">{inspectedRescue.locationName}</p>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-[11px]">
-                    <div className="text-slate-400 text-[10px]">Trapped Citizens</div>
-                    <div className="text-white font-bold font-mono">
+                  <div className={`p-2.5 rounded-xl border text-[11px] ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                    <div className="text-slate-500 dark:text-slate-400 text-[10px]">Trapped Citizens</div>
+                    <div className="text-slate-900 dark:text-white font-bold font-mono">
                       Adults: {inspectedRescue.peopleCount?.adults || 0} &bull; Children: {inspectedRescue.peopleCount?.children || 0} &bull; Elderly: {inspectedRescue.peopleCount?.elderlyOrSpecialCare || 0}
                     </div>
                   </div>
 
-                  <p className="text-rose-300 text-[11px]">
+                  <p className="text-rose-600 dark:text-rose-300 text-[11px]">
                     <strong>Message:</strong> {inspectedRescue.message}
                   </p>
 
-                  <div className="text-[10px] text-slate-400">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400">
                     Phone: {inspectedRescue.contactPhone}
                   </div>
 

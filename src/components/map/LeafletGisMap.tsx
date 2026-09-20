@@ -23,6 +23,7 @@ import { emergencyStore } from '../../services/emergencyStore';
 
 interface LeafletGisMapProps {
   height?: string;
+  darkMode?: boolean;
   selectedHazard?: HazardArea | null;
   onSelectHazard?: (hazard: HazardArea | null) => void;
   selectedHabitation?: Habitation | null;
@@ -37,6 +38,7 @@ type BasemapType = 'standard' | 'satellite' | 'natural' | 'terrain';
 
 export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
   height = '600px',
+  darkMode: propDarkMode,
   selectedHazard: externalSelectedHazard,
   onSelectHazard,
   selectedHabitation: externalSelectedHabitation,
@@ -46,6 +48,10 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
   onLaunchRelocationFor,
   activeRouteId,
 }) => {
+  const isDark = propDarkMode !== undefined 
+    ? propDarkMode 
+    : typeof document !== 'undefined' ? document.documentElement.classList.contains('dark') : true;
+
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
@@ -546,14 +552,18 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
             placeholder="Search location, village, district..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-8 py-2 text-xs rounded-xl bg-slate-950/90 text-white placeholder-slate-400 border border-slate-700/80 backdrop-blur-md shadow-xl focus:outline-hidden focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/40 transition-colors"
+            className={`w-full pl-9 pr-8 py-2 text-xs rounded-xl backdrop-blur-md shadow-xl focus:outline-hidden focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/40 transition-colors ${
+              isDark
+                ? 'bg-slate-950/90 text-white placeholder-slate-400 border border-slate-700/80'
+                : 'bg-white/95 text-slate-900 placeholder-slate-500 border border-slate-300 shadow-md'
+            }`}
           />
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          <Search className={`w-4 h-4 absolute left-3 top-2.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`} />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery('')}
-              className="absolute right-2.5 top-2.5 text-slate-400 hover:text-white"
+              className={`absolute right-2.5 top-2.5 ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-900'}`}
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -563,7 +573,9 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
 
       {/* Top-right: Professional Basemap Selector */}
       <div className="absolute top-3 right-3 z-[1000] flex items-center gap-2">
-        <div className="bg-slate-900/90 border border-slate-700/80 rounded-xl p-1 shadow-xl backdrop-blur-md flex items-center gap-1">
+        <div className={`border rounded-xl p-1 shadow-xl backdrop-blur-md flex items-center gap-1 ${
+          isDark ? 'bg-slate-900/90 border-slate-700/80' : 'bg-white/95 border-slate-200 shadow-md'
+        }`}>
           {[
             { id: 'standard', label: 'Standard' },
             { id: 'satellite', label: 'Satellite' },
@@ -576,7 +588,9 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
               className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-colors ${
                 currentBasemap === bm.id
                   ? 'bg-rose-600 text-white shadow-xs'
-                  : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                  : isDark 
+                    ? 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               {bm.label}
@@ -585,17 +599,23 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
         </div>
 
         {/* Fullscreen & Reset */}
-        <div className="bg-slate-900/90 border border-slate-700/80 rounded-xl p-1 shadow-xl backdrop-blur-md flex items-center gap-1">
+        <div className={`border rounded-xl p-1 shadow-xl backdrop-blur-md flex items-center gap-1 ${
+          isDark ? 'bg-slate-900/90 border-slate-700/80' : 'bg-white/95 border-slate-200 shadow-md'
+        }`}>
           <button
             onClick={handleResetView}
-            className="p-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white"
+            className={`p-1.5 rounded-lg ${
+              isDark ? 'text-slate-300 hover:bg-slate-800 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            }`}
             title="Reset to Uttarakhand Sector"
           >
             <Crosshair className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsFullscreen(!isFullscreen)}
-            className="p-1.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white"
+            className={`p-1.5 rounded-lg ${
+              isDark ? 'text-slate-300 hover:bg-slate-800 hover:text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            }`}
             title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Map'}
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -607,15 +627,25 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
       <div className="absolute top-16 right-3 z-[1000] flex flex-col gap-2">
         <button
           onClick={() => setShowLayerMenu(!showLayerMenu)}
-          className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-slate-200 hover:bg-slate-800 backdrop-blur-md shadow-xl flex items-center justify-center"
+          className={`p-2.5 rounded-xl border backdrop-blur-md shadow-xl flex items-center justify-center transition-colors ${
+            isDark 
+              ? 'bg-slate-900/90 border-slate-700/80 text-slate-200 hover:bg-slate-800' 
+              : 'bg-white/95 border-slate-200 text-slate-700 hover:bg-slate-100 shadow-md'
+          }`}
           title="Toggle GIS Layers"
         >
           <Layers className="w-4 h-4 text-rose-500" />
         </button>
 
         {showLayerMenu && (
-          <div className="bg-slate-900/95 border border-slate-700/90 rounded-xl p-3 shadow-2xl backdrop-blur-md w-56 text-slate-200 text-xs space-y-2">
-            <div className="font-bold text-[10px] uppercase tracking-wider text-slate-400 pb-1 border-b border-slate-800">
+          <div className={`border rounded-xl p-3 shadow-2xl backdrop-blur-md w-56 text-xs space-y-2 ${
+            isDark 
+              ? 'bg-slate-900/95 border-slate-700/90 text-slate-200' 
+              : 'bg-white/95 border-slate-200 text-slate-800 shadow-xl'
+          }`}>
+            <div className={`font-bold text-[10px] uppercase tracking-wider pb-1 border-b ${
+              isDark ? 'text-slate-400 border-slate-800' : 'text-slate-500 border-slate-200'
+            }`}>
               Active GIS Overlays
             </div>
 
@@ -675,8 +705,14 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
       </div>
 
       {/* Bottom-left: High-Contrast Visual Legend */}
-      <div className="absolute bottom-3 left-3 z-[1000] bg-slate-950/85 border border-slate-800/80 rounded-xl p-3 shadow-xl backdrop-blur-md text-[11px] text-slate-300 max-w-xs space-y-1.5">
-        <div className="font-bold text-[10px] uppercase tracking-wider text-slate-400 font-mono">
+      <div className={`absolute bottom-3 left-3 z-[1000] border rounded-xl p-3 shadow-xl backdrop-blur-md text-[11px] max-w-xs space-y-1.5 ${
+        isDark 
+          ? 'bg-slate-950/85 border-slate-800/80 text-slate-300' 
+          : 'bg-white/95 border-slate-200 text-slate-700 shadow-lg'
+      }`}>
+        <div className={`font-bold text-[10px] uppercase tracking-wider font-mono ${
+          isDark ? 'text-slate-400' : 'text-slate-500'
+        }`}>
           Legend
         </div>
         <div className="grid grid-cols-2 gap-x-4 gap-y-1">
@@ -708,28 +744,38 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
       </div>
 
       {/* Bottom-right: GIS Telemetry, Coordinates & Scale */}
-      <div className="absolute bottom-3 right-3 z-[1000] bg-slate-950/90 border border-slate-800/80 rounded-xl px-3 py-1.5 shadow-xl backdrop-blur-md text-[10px] font-mono text-slate-300 flex items-center gap-3">
-        <div className="flex items-center gap-1.5 text-rose-400">
+      <div className={`absolute bottom-3 right-3 z-[1000] border rounded-xl px-3 py-1.5 shadow-xl backdrop-blur-md text-[10px] font-mono flex items-center gap-3 ${
+        isDark 
+          ? 'bg-slate-950/90 border-slate-800/80 text-slate-300' 
+          : 'bg-white/95 border-slate-200 text-slate-700 shadow-lg'
+      }`}>
+        <div className="flex items-center gap-1.5 text-rose-500">
           <Compass className="w-3 h-3 text-rose-500" />
           <span className="font-bold tracking-wider">RESQZONE GIS</span>
         </div>
-        <div className="text-slate-400">
+        <div className={isDark ? 'text-slate-400' : 'text-slate-500'}>
           {coordinates.lat}° N, {coordinates.lng}° E
         </div>
-        <div className="hidden sm:block text-slate-500">|</div>
-        <div className="hidden sm:block text-slate-400">
+        <div className={`hidden sm:block ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>|</div>
+        <div className={`hidden sm:block ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
           Z{coordinates.zoom} • 1:25,000
         </div>
-        <div className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">
+        <div className={`text-[9px] px-1.5 py-0.5 rounded ${
+          isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-100 text-slate-600 border border-slate-200'
+        }`}>
           Prototype GIS Data
         </div>
       </div>
 
       {/* Interactive Side Drawer Panel (Triggered by clicking Hazard, Habitation, or Safe Zone) */}
       {(inspectedHazard || inspectedHabitation || inspectedSafeZone) && (
-        <div className="absolute top-14 bottom-14 right-3 z-[1001] w-80 sm:w-96 bg-slate-900/95 border border-slate-700/80 rounded-2xl p-5 shadow-2xl backdrop-blur-xl text-slate-100 overflow-y-auto animate-in slide-in-from-right duration-300">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-            <div className="flex items-center gap-2 text-xs font-bold font-mono uppercase tracking-wider text-rose-400">
+        <div className={`absolute top-14 bottom-14 right-3 z-[1001] w-80 sm:w-96 border rounded-2xl p-5 shadow-2xl backdrop-blur-xl overflow-y-auto animate-in slide-in-from-right duration-300 ${
+          isDark ? 'bg-slate-900/95 border-slate-700/80 text-slate-100' : 'bg-white/95 border-slate-200 text-slate-900'
+        }`}>
+          <div className={`flex items-center justify-between pb-3 border-b mb-4 ${
+            isDark ? 'border-slate-800' : 'border-slate-200'
+          }`}>
+            <div className="flex items-center gap-2 text-xs font-bold font-mono uppercase tracking-wider text-rose-500">
               <Info className="w-4 h-4" />
               <span>
                 {inspectedHazard && 'Hazard Zone Telemetry'}
@@ -743,7 +789,9 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
                 setInspectedHabitation(null);
                 setInspectedSafeZone(null);
               }}
-              className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white"
+              className={`p-1 rounded-lg ${
+                isDark ? 'hover:bg-slate-800 text-slate-400 hover:text-white' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-900'
+              }`}
             >
               <X className="w-4 h-4" />
             </button>
@@ -752,7 +800,7 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
           {/* HAZARD INSPECTION VIEW */}
           {inspectedHazard && (
             <div className="space-y-4">
-              <div className="relative rounded-xl overflow-hidden h-32 border border-slate-800">
+              <div className={`relative rounded-xl overflow-hidden h-32 border ${isDark ? 'border-slate-800' : 'border-slate-200'}`}>
                 <img 
                   src={inspectedHazard.imageUrl} 
                   alt={inspectedHazard.name} 
@@ -764,21 +812,21 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
               </div>
 
               <div>
-                <h4 className="text-base font-bold text-white leading-tight">
+                <h4 className={`text-base font-bold leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   {inspectedHazard.name}
                 </h4>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className={`text-xs mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                   ID: {inspectedHazard.id} • Reported {inspectedHazard.reportedTime}
                 </p>
               </div>
 
               {/* Risk meter */}
-              <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
+              <div className={`p-3 rounded-xl border space-y-2 ${isDark ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                 <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-slate-400">Composite Risk Score</span>
-                  <span className="text-rose-400 font-mono">{inspectedHazard.riskScore} / 10</span>
+                  <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>Composite Risk Score</span>
+                  <span className="text-rose-500 font-mono">{inspectedHazard.riskScore} / 10</span>
                 </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className={`w-full h-2 rounded-full overflow-hidden ${isDark ? 'bg-slate-800' : 'bg-slate-200'}`}>
                   <div 
                     className="h-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 rounded-full"
                     style={{ width: `${(inspectedHazard.riskScore / 10) * 100}%` }}
@@ -788,34 +836,34 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
 
               {/* Grid metrics */}
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Affected Area</div>
-                  <div className="text-sm font-bold text-white font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Affected Area</div>
+                  <div className={`text-sm font-bold font-mono mt-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {inspectedHazard.affectedAreaSqKm} km²
                   </div>
                 </div>
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Population Exposed</div>
-                  <div className="text-sm font-bold text-rose-400 font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Population Exposed</div>
+                  <div className="text-sm font-bold text-rose-500 font-mono mt-0.5">
                     {inspectedHazard.affectedPopulation.toLocaleString()}
                   </div>
                 </div>
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Habitations Count</div>
-                  <div className="text-sm font-bold text-white font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Habitations Count</div>
+                  <div className={`text-sm font-bold font-mono mt-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {inspectedHazard.affectedHabitationsCount}
                   </div>
                 </div>
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Primary Hazard</div>
-                  <div className="text-sm font-bold text-amber-400 font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Primary Hazard</div>
+                  <div className="text-sm font-bold text-amber-500 font-mono mt-0.5">
                     {inspectedHazard.type}
                   </div>
                 </div>
               </div>
 
-              <div className="text-xs text-slate-300 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-                <div className="font-semibold text-rose-400 mb-1">Recommended Operation:</div>
+              <div className={`text-xs p-3 rounded-xl border ${isDark ? 'text-slate-300 bg-slate-950/60 border-slate-800' : 'text-slate-700 bg-slate-50 border-slate-200'}`}>
+                <div className="font-semibold text-rose-500 mb-1">Recommended Operation:</div>
                 <p className="leading-relaxed">{inspectedHazard.recommendedAction}</p>
               </div>
             </div>
@@ -825,43 +873,43 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
           {inspectedHabitation && (
             <div className="space-y-4">
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-400 border border-rose-500/30 mb-1.5">
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-500 border border-rose-500/30 mb-1.5">
                   {inspectedHabitation.riskLevel} RISK • {inspectedHabitation.vulnerability} VULNERABILITY
                 </div>
-                <h4 className="text-lg font-bold text-white leading-tight">
+                <h4 className={`text-lg font-bold leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   {inspectedHabitation.name}
                 </h4>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                   {inspectedHabitation.district} District, {inspectedHabitation.state}
                 </p>
-                <div className="text-[10px] text-slate-500 font-mono mt-1">
+                <div className={`text-[10px] font-mono mt-1 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
                   Source: {inspectedHabitation.source}
                 </div>
               </div>
 
               {/* Population & demographics */}
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Exposed Population</div>
-                  <div className="text-base font-bold text-white font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Exposed Population</div>
+                  <div className={`text-base font-bold font-mono mt-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {inspectedHabitation.population.toLocaleString()}
                   </div>
                 </div>
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Children (0-6 Yrs)</div>
-                  <div className="text-base font-bold text-amber-400 font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Children (0-6 Yrs)</div>
+                  <div className="text-base font-bold text-amber-500 font-mono mt-0.5">
                     {inspectedHabitation.children0_6.toLocaleString()}
                   </div>
                 </div>
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Households</div>
-                  <div className="text-base font-bold text-slate-200 font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Households</div>
+                  <div className={`text-base font-bold font-mono mt-0.5 ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>
                     {inspectedHabitation.households.toLocaleString()}
                   </div>
                 </div>
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Local Safe Capacity</div>
-                  <div className="text-base font-bold text-rose-400 font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Local Safe Capacity</div>
+                  <div className="text-base font-bold text-rose-500 font-mono mt-0.5">
                     {inspectedHabitation.safeCapacity.toLocaleString()}
                   </div>
                 </div>
@@ -869,11 +917,11 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
 
               {/* Carrying capacity warning */}
               <div className="bg-rose-500/10 border border-rose-500/30 p-3 rounded-xl text-xs space-y-1.5">
-                <div className="flex justify-between font-bold text-rose-400">
+                <div className="flex justify-between font-bold text-rose-500">
                   <span>Capacity Deficit Status:</span>
                   <span>{inspectedHabitation.capacityStatus} ({inspectedHabitation.capacityUtilization}%)</span>
                 </div>
-                <p className="text-slate-300 leading-relaxed text-[11px]">
+                <p className={`leading-relaxed text-[11px] ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                   Local safe space cannot accommodate {inspectedHabitation.population - inspectedHabitation.safeCapacity} residents. Priority relocation required.
                 </p>
               </div>
@@ -894,7 +942,7 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
           {/* SAFE ZONE INSPECTION VIEW */}
           {inspectedSafeZone && (
             <div className="space-y-4">
-              <div className="relative rounded-xl overflow-hidden h-32 border border-slate-800">
+              <div className={`relative rounded-xl overflow-hidden h-32 border ${isDark ? 'border-slate-800' : 'border-slate-200'}`}>
                 <img 
                   src={inspectedSafeZone.imageUrl} 
                   alt={inspectedSafeZone.name} 
@@ -906,23 +954,23 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
               </div>
 
               <div>
-                <h4 className="text-base font-bold text-white leading-tight">
+                <h4 className={`text-base font-bold leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   {inspectedSafeZone.name}
                 </h4>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className={`text-xs mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                   Type: {inspectedSafeZone.type} • {inspectedSafeZone.district}, {inspectedSafeZone.state}
                 </p>
               </div>
 
               {/* Capacity bar */}
-              <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
+              <div className={`p-3 rounded-xl border space-y-2 ${isDark ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                 <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-slate-400">Available Bed Spaces</span>
-                  <span className="text-emerald-400 font-mono font-bold">
+                  <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>Available Bed Spaces</span>
+                  <span className="text-emerald-500 font-mono font-bold">
                     {inspectedSafeZone.availableCapacity.toLocaleString()} / {inspectedSafeZone.safeCapacity.toLocaleString()}
                   </span>
                 </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className={`w-full h-2 rounded-full overflow-hidden ${isDark ? 'bg-slate-800' : 'bg-slate-200'}`}>
                   <div 
                     className="h-full bg-emerald-500 rounded-full"
                     style={{ width: `${((inspectedSafeZone.safeCapacity - inspectedSafeZone.availableCapacity) / inspectedSafeZone.safeCapacity) * 100}%` }}
@@ -931,35 +979,37 @@ export const LeafletGisMap: React.FC<LeafletGisMapProps> = ({
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Distance</div>
-                  <div className="text-sm font-bold text-white font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Distance</div>
+                  <div className={`text-sm font-bold font-mono mt-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {inspectedSafeZone.distanceKm} km
                   </div>
                 </div>
-                <div className="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
-                  <div className="text-[10px] text-slate-400">Est. Travel Time</div>
-                  <div className="text-sm font-bold text-cyan-400 font-mono mt-0.5">
+                <div className={`p-2.5 rounded-xl border ${isDark ? 'bg-slate-800/60 border-slate-700/50' : 'bg-slate-50 border-slate-200'}`}>
+                  <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Est. Travel Time</div>
+                  <div className="text-sm font-bold text-cyan-500 font-mono mt-0.5">
                     {inspectedSafeZone.travelTimeMin} min
                   </div>
                 </div>
               </div>
 
               <div className="text-xs space-y-1">
-                <div className="text-slate-400 font-semibold">Available Facilities:</div>
+                <div className={`font-semibold ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Available Facilities:</div>
                 <div className="flex flex-wrap gap-1.5">
                   {inspectedSafeZone.facilities.map((fac, idx) => (
-                    <span key={idx} className="text-[10px] px-2 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+                    <span key={idx} className={`text-[10px] px-2 py-1 rounded-md border ${
+                      isDark ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-slate-100 text-slate-700 border-slate-200'
+                    }`}>
                       {fac}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-xs">
-                <div className="text-slate-400 text-[10px]">Camp In-Charge:</div>
-                <div className="font-semibold text-slate-200 mt-0.5">{inspectedSafeZone.contactPerson}</div>
-                <a href={`tel:${inspectedSafeZone.contactPhone}`} className="text-cyan-400 text-[11px] font-mono mt-0.5 block hover:underline">
+              <div className={`p-2.5 rounded-xl border text-xs ${isDark ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Camp In-Charge:</div>
+                <div className={`font-semibold mt-0.5 ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>{inspectedSafeZone.contactPerson}</div>
+                <a href={`tel:${inspectedSafeZone.contactPhone}`} className="text-cyan-600 dark:text-cyan-400 text-[11px] font-mono mt-0.5 block hover:underline">
                   {inspectedSafeZone.contactPhone}
                 </a>
               </div>

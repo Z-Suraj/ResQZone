@@ -238,7 +238,7 @@ export const AlertsView: React.FC<AlertsViewProps> = ({ darkMode }) => {
               }`}>
                 Active Broadcast Ledger ({filteredAlerts.length})
               </span>
-              <span className="text-[11px] text-slate-400 font-mono">
+              <span className={`text-[11px] font-mono ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                 Real-time synchronized with Citizen Mode
               </span>
             </div>
@@ -268,12 +268,12 @@ export const AlertsView: React.FC<AlertsViewProps> = ({ darkMode }) => {
                           {alert.severity}
                         </span>
 
-                        <span className="text-[10px] font-mono text-slate-400 flex items-center gap-1">
+                        <span className={`text-[10px] font-mono flex items-center gap-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                           <Clock className="w-3 h-3" />
                           <span>{alert.timestamp}</span>
                         </span>
 
-                        <span className="text-[10px] font-semibold text-slate-300 flex items-center gap-1">
+                        <span className={`text-[10px] font-semibold flex items-center gap-1 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                           <MapPin className="w-3 h-3 text-rose-500" />
                           <span>{alert.region}</span>
                         </span>
@@ -291,7 +291,9 @@ export const AlertsView: React.FC<AlertsViewProps> = ({ darkMode }) => {
                       className={`px-2.5 py-1 rounded-xl text-[10px] font-bold border transition-colors flex items-center gap-1 cursor-pointer shrink-0 ${
                         alert.active
                           ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30 hover:bg-rose-500/20 hover:text-rose-400 hover:border-rose-500/30'
-                          : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-emerald-500/20 hover:text-emerald-400'
+                          : darkMode 
+                            ? 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-emerald-500/20 hover:text-emerald-400'
+                            : 'bg-slate-100 text-slate-600 border-slate-300 hover:bg-emerald-50 hover:text-emerald-700'
                       }`}
                       title="Toggle active broadcast state"
                     >

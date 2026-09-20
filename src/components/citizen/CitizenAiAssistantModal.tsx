@@ -129,7 +129,9 @@ export const CitizenAiAssistantModal: React.FC<CitizenAiAssistantModalProps> = (
 
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer"
+            className={`w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-colors ${
+              darkMode ? 'bg-slate-800 text-slate-400 hover:text-white' : 'bg-slate-100 text-slate-500 hover:text-slate-800'
+            }`}
           >
             <X className="w-4 h-4" />
           </button>
@@ -155,12 +157,12 @@ export const CitizenAiAssistantModal: React.FC<CitizenAiAssistantModalProps> = (
                   ? 'bg-blue-600 text-white rounded-tr-xs'
                   : darkMode
                   ? 'bg-slate-950 border border-slate-800 text-slate-200 rounded-tl-xs'
-                  : 'bg-slate-100 text-slate-900 rounded-tl-xs'
+                  : 'bg-slate-100 border border-slate-200 text-slate-900 rounded-tl-xs'
               }`}>
                 {msg.text}
 
                 {msg.actionTab && (
-                  <div className="mt-3 pt-2 border-t border-slate-700/40">
+                  <div className={`mt-3 pt-2 border-t ${darkMode ? 'border-slate-700/40' : 'border-slate-200'}`}>
                     <button
                       onClick={() => {
                         onClose();
@@ -178,7 +180,9 @@ export const CitizenAiAssistantModal: React.FC<CitizenAiAssistantModalProps> = (
         </div>
 
         {/* Preset Suggestions */}
-        <div className="px-4 py-2 flex items-center gap-1.5 overflow-x-auto border-t border-slate-800/60 no-scrollbar">
+        <div className={`px-4 py-2 flex items-center gap-1.5 overflow-x-auto border-t no-scrollbar ${
+          darkMode ? 'border-slate-800/60' : 'border-slate-200'
+        }`}>
           {PRESET_QUESTIONS.map((q, idx) => (
             <button
               key={idx}
@@ -193,7 +197,7 @@ export const CitizenAiAssistantModal: React.FC<CitizenAiAssistantModalProps> = (
         </div>
 
         {/* Input Footer */}
-        <div className="p-3 border-t border-slate-700/40 flex items-center gap-2">
+        <div className={`p-3 border-t flex items-center gap-2 ${darkMode ? 'border-slate-700/40' : 'border-slate-200'}`}>
           <input
             type="text"
             value={input}

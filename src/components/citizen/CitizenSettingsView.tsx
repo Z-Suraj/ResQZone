@@ -92,7 +92,7 @@ export const CitizenSettingsView: React.FC<CitizenSettingsViewProps> = ({
       <div className="relative z-10 p-4 sm:p-6 lg:p-8 space-y-6 max-w-3xl mx-auto">
         {/* Header */}
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-500/10 text-slate-400 text-xs font-bold font-mono mb-1.5 border border-slate-500/20">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-500/10 text-slate-500 dark:text-slate-400 text-xs font-bold font-mono mb-1.5 border border-slate-500/20">
             <Settings className="w-3.5 h-3.5" />
             <span>PERSONAL IDENTITY & PREFERENCES</span>
           </div>
@@ -101,7 +101,7 @@ export const CitizenSettingsView: React.FC<CitizenSettingsViewProps> = ({
           }`}>
             Citizen Profile & App Settings
           </h1>
-          <p className={`text-xs sm:text-sm mt-0.5 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+          <p className={`text-xs sm:text-sm mt-0.5 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Manage your verified name, emergency contact speed dial, medical notes for first responders, and local jurisdiction.
           </p>
         </div>
@@ -260,7 +260,7 @@ export const CitizenSettingsView: React.FC<CitizenSettingsViewProps> = ({
               />
               <PhoneCall className="w-4 h-4 text-emerald-500 absolute left-3 top-3" />
             </div>
-            <p className="text-[10px] text-slate-400">
+            <p className={`text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
               Default is 112 (National Unified Helpline). You may change this to your local ward liaison if instructed.
             </p>
           </div>
@@ -290,7 +290,7 @@ export const CitizenSettingsView: React.FC<CitizenSettingsViewProps> = ({
               />
               <MapPin className="w-4 h-4 text-rose-500 absolute left-3 top-3" />
             </div>
-            <p className="text-[10px] text-slate-400">
+            <p className={`text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
               Used to calculate proximity to active flood zones and filter relevant municipal orders.
             </p>
           </div>
@@ -310,7 +310,7 @@ export const CitizenSettingsView: React.FC<CitizenSettingsViewProps> = ({
                 {darkMode ? <Moon className="w-4 h-4 text-blue-400" /> : <Sun className="w-4 h-4 text-amber-500" />}
                 <span>High-Contrast Mode</span>
               </div>
-              <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+              <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                 Switch between Night Vision Dark and High-Sunlight Light theme.
               </p>
             </div>
@@ -326,13 +326,15 @@ export const CitizenSettingsView: React.FC<CitizenSettingsViewProps> = ({
             </button>
           </div>
 
-          <div className="flex items-center justify-between pt-3 border-t border-slate-800 text-xs">
+          <div className={`flex items-center justify-between pt-3 border-t text-xs ${
+            darkMode ? 'border-slate-800' : 'border-slate-200'
+          }`}>
             <div className="space-y-0.5">
               <div className={`font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <Database className="w-4 h-4 text-slate-400" />
+                <Database className={`w-4 h-4 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
                 <span>Offline Cache Status</span>
               </div>
-              <div className="text-[10px] text-slate-400">
+              <div className={`text-[10px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                 {currentLoc ? `${currentLoc.name} Regional Sector Map cached (14 MB)` : 'Sector Map cached (14 MB)'}
               </div>
             </div>

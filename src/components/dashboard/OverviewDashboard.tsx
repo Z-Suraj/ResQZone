@@ -135,7 +135,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
             {/* Quick action buttons & Search */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <div className="w-full sm:w-80">
-                <AuthorityLocationSearch darkMode={true} />
+                <AuthorityLocationSearch darkMode={darkMode} />
               </div>
               <button
                 onClick={() => onNavigateTab('relocation')}
@@ -217,7 +217,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                   </div>
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
+              <ChevronRight className={`w-4 h-4 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
             </div>
           </div>
 
@@ -251,7 +251,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                   </div>
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
+              <ChevronRight className={`w-4 h-4 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
             </div>
           </div>
 
@@ -283,7 +283,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                   </div>
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
+              <ChevronRight className={`w-4 h-4 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
             </div>
           </div>
 
@@ -313,7 +313,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
                   </div>
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
+              <ChevronRight className={`w-4 h-4 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
             </div>
           </div>
         </div>

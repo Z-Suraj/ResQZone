@@ -267,7 +267,7 @@ export const CarryingCapacityView: React.FC<CarryingCapacityViewProps> = ({
               }`}>
                 Verified Safe Zones &amp; Relief Camps ({DEMO_SAFE_ZONES.length})
               </span>
-              <span className="text-[11px] text-slate-400 font-mono">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                 Click camp to view live facility breakdown
               </span>
             </div>
@@ -306,7 +306,7 @@ export const CarryingCapacityView: React.FC<CarryingCapacityViewProps> = ({
                           {sz.name}
                         </h3>
 
-                        <div className="flex items-center gap-2 text-xs text-slate-400">
+                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                           <MapPin className="w-3.5 h-3.5 text-rose-500" />
                           <span>{sz.district}, {sz.state} &bull; {sz.distanceKm} km away</span>
                         </div>

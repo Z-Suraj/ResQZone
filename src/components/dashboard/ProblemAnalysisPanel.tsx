@@ -92,15 +92,15 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
             </h3>
             {getStatusBadge(report.provenance.status)}
           </div>
-          <p className="text-xs text-slate-400">
-            Active analysis around <strong className="text-cyan-400">{report.selectedLocation}</strong> &bull; {report.problemsIdentified} bottlenecks tracked
+          <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Active analysis around <strong className="text-cyan-600 dark:text-cyan-400">{report.selectedLocation}</strong> &bull; {report.problemsIdentified} bottlenecks tracked
           </p>
         </div>
 
         {/* Provenance note */}
-        <div className="text-right text-[10px] font-mono text-slate-400">
+        <div className={`text-right text-[10px] font-mono ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
           <div>Source: {report.provenance.source}</div>
-          <div className="text-slate-400">{report.lastUpdated}</div>
+          <div>{report.lastUpdated}</div>
         </div>
       </div>
 
@@ -109,41 +109,41 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
         <div className={`p-3 rounded-xl border ${
           darkMode ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-50 border-slate-200'
         }`}>
-          <div className="text-[10px] uppercase font-mono font-bold text-slate-400">Total Identified</div>
-          <div className="text-2xl font-extrabold font-mono text-white mt-0.5">
+          <div className={`text-[10px] uppercase font-mono font-bold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Total Identified</div>
+          <div className={`text-2xl font-extrabold font-mono mt-0.5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             {report.problemsIdentified}
           </div>
-          <div className="text-[10px] text-slate-400 mt-0.5">{report.affectedHabitationsCount} Habitations impacted</div>
+          <div className={`text-[10px] mt-0.5 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{report.affectedHabitationsCount} Habitations impacted</div>
         </div>
 
         <div className={`p-3 rounded-xl border ${
           darkMode ? 'bg-rose-950/20 border-rose-900/40' : 'bg-rose-50/70 border-rose-200'
         }`}>
-          <div className="text-[10px] uppercase font-mono font-bold text-rose-400">Pending Remediation</div>
+          <div className={`text-[10px] uppercase font-mono font-bold ${darkMode ? 'text-rose-400' : 'text-rose-700'}`}>Pending Remediation</div>
           <div className="text-2xl font-extrabold font-mono text-rose-500 mt-0.5">
             {report.problemsPending}
           </div>
-          <div className="text-[10px] text-rose-400/80 mt-0.5">Immediate intervention</div>
+          <div className={`text-[10px] mt-0.5 ${darkMode ? 'text-rose-400/80' : 'text-rose-600'}`}>Immediate intervention</div>
         </div>
 
         <div className={`p-3 rounded-xl border ${
           darkMode ? 'bg-emerald-950/20 border-emerald-900/40' : 'bg-emerald-50/70 border-emerald-200'
         }`}>
-          <div className="text-[10px] uppercase font-mono font-bold text-emerald-400">Resolved / Mitigated</div>
+          <div className={`text-[10px] uppercase font-mono font-bold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Resolved / Mitigated</div>
           <div className="text-2xl font-extrabold font-mono text-emerald-500 mt-0.5">
             {report.problemsSolved}
           </div>
-          <div className="text-[10px] text-emerald-400/80 mt-0.5">Corridors cleared</div>
+          <div className={`text-[10px] mt-0.5 ${darkMode ? 'text-emerald-400/80' : 'text-emerald-600'}`}>Corridors cleared</div>
         </div>
 
         <div className={`p-3 rounded-xl border ${
           darkMode ? 'bg-cyan-950/20 border-cyan-900/40' : 'bg-cyan-50/70 border-cyan-200'
         }`}>
-          <div className="text-[10px] uppercase font-mono font-bold text-cyan-400">Resolution Progress</div>
-          <div className="text-2xl font-extrabold font-mono text-cyan-400 mt-0.5">
+          <div className={`text-[10px] uppercase font-mono font-bold ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>Resolution Progress</div>
+          <div className={`text-2xl font-extrabold font-mono mt-0.5 ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>
             {report.addressedPercentage}%
           </div>
-          <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1.5">
+          <div className={`w-full h-1.5 rounded-full overflow-hidden mt-1.5 ${darkMode ? 'bg-slate-800' : 'bg-slate-200'}`}>
             <div 
               className="bg-cyan-500 h-full rounded-full transition-all duration-500" 
               style={{ width: `${report.addressedPercentage}%` }}
@@ -153,10 +153,12 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-2 mb-3">
+      <div className={`flex items-center justify-between gap-2 border-b pb-2 mb-3 ${
+        darkMode ? 'border-slate-800' : 'border-slate-200'
+      }`}>
         <div className="flex items-center gap-1.5 text-xs">
-          <Filter className="w-3.5 h-3.5 text-slate-400" />
-          <span className="text-[11px] font-bold text-slate-400">Status Filter:</span>
+          <Filter className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
+          <span className={`text-[11px] font-bold ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Status Filter:</span>
           {(['ALL', 'PENDING', 'IN_PROGRESS', 'SOLVED'] as const).map(tab => (
             <button
               key={tab}
@@ -172,7 +174,7 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
           ))}
         </div>
 
-        <span className="text-xs font-mono text-slate-400">
+        <span className={`text-xs font-mono ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
           Showing {filteredProblems.length} items
         </span>
       </div>
@@ -180,7 +182,7 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
       {/* Problem Items List */}
       <div className="space-y-2.5 max-h-[380px] overflow-y-auto pr-1">
         {filteredProblems.length === 0 ? (
-          <div className="p-6 text-center text-xs text-slate-400">
+          <div className={`p-6 text-center text-xs ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
             No problems matching the active filter.
           </div>
         ) : (
@@ -203,7 +205,9 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
                   <div className="space-y-1 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="flex items-center gap-1 text-[11px] font-bold font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                      <span className={`flex items-center gap-1 text-[11px] font-bold font-mono px-2 py-0.5 rounded ${
+                        darkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-700'
+                      }`}>
                         {getCategoryIcon(prob.category)}
                         {prob.category}
                       </span>
@@ -224,7 +228,7 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
                         {prob.status.replace('_', ' ')}
                       </span>
 
-                      <span className="text-[10px] text-slate-400 font-mono">
+                      <span className={`text-[10px] font-mono ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                         Identified: {prob.identifiedAt}
                       </span>
                     </div>
@@ -264,7 +268,9 @@ export const ProblemAnalysisPanel: React.FC<ProblemAnalysisPanelProps> = ({
                             placeholder="Action notes..."
                             value={actionInput}
                             onChange={(e) => setActionInput(e.target.value)}
-                            className="px-2 py-1 text-xs rounded bg-slate-900 border border-slate-700 text-white focus:outline-hidden focus:border-cyan-400 w-36"
+                            className={`px-2 py-1 text-xs rounded border focus:outline-hidden focus:border-cyan-400 w-36 ${
+                              darkMode ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'
+                            }`}
                           />
                           <button
                             onClick={() => handleResolve(prob.id)}

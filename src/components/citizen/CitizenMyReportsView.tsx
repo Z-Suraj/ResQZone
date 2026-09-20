@@ -214,8 +214,8 @@ export const CitizenMyReportsView: React.FC<CitizenMyReportsViewProps> = ({
                           <h3 className={`text-sm font-black truncate ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                             {report.title}
                           </h3>
-                          <div className="flex items-center gap-1 text-[11px] text-slate-400 truncate">
-                            <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                          <div className={`flex items-center gap-1 text-[11px] truncate ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                            <MapPin className={`w-3 h-3 shrink-0 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`} />
                             <span className="truncate">{report.location}</span>
                           </div>
                         </div>
@@ -231,8 +231,10 @@ export const CitizenMyReportsView: React.FC<CitizenMyReportsViewProps> = ({
                   </p>
 
                   {/* Footer timestamp & View details */}
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-700/30 text-xs">
-                    <div className="flex items-center gap-1 text-[11px] text-slate-400">
+                  <div className={`flex items-center justify-between pt-2 border-t text-xs ${
+                    darkMode ? 'border-slate-800' : 'border-slate-200'
+                  }`}>
+                    <div className={`flex items-center gap-1 text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                       <Clock className="w-3 h-3" />
                       <span>Reported: {report.reportedTime}</span>
                     </div>
@@ -310,7 +312,7 @@ export const CitizenMyReportsView: React.FC<CitizenMyReportsViewProps> = ({
 
               {/* Lifecycle Status Stepper */}
               <div className="space-y-2">
-                <div className="text-[11px] text-slate-400 font-bold uppercase">Official Verification Stepper</div>
+                <div className={`text-[11px] font-bold uppercase ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>Official Verification Stepper</div>
                 <div className="grid grid-cols-4 gap-1.5 text-center text-[10px] font-bold">
                   <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-500 border border-emerald-500/30">
                     1. SUBMITTED
@@ -318,21 +320,21 @@ export const CitizenMyReportsView: React.FC<CitizenMyReportsViewProps> = ({
                   <div className={`p-2 rounded-xl border ${
                     selectedReport.status !== 'NEW' 
                       ? 'bg-emerald-500/20 text-emerald-500 border-emerald-500/30' 
-                      : 'bg-slate-800/40 text-slate-400 border-slate-700'
+                      : darkMode ? 'bg-slate-800/40 text-slate-400 border-slate-700' : 'bg-slate-100 text-slate-500 border-slate-200'
                   }`}>
                     2. REVIEWING
                   </div>
                   <div className={`p-2 rounded-xl border ${
                     selectedReport.status === 'ACTIVE' || selectedReport.status === 'RESOLVED'
                       ? 'bg-emerald-500/20 text-emerald-500 border-emerald-500/30' 
-                      : 'bg-slate-800/40 text-slate-400 border-slate-700'
+                      : darkMode ? 'bg-slate-800/40 text-slate-400 border-slate-700' : 'bg-slate-100 text-slate-500 border-slate-200'
                   }`}>
                     3. VERIFIED
                   </div>
                   <div className={`p-2 rounded-xl border ${
                     selectedReport.status === 'RESOLVED'
                       ? 'bg-emerald-500/20 text-emerald-500 border-emerald-500/30' 
-                      : 'bg-slate-800/40 text-slate-400 border-slate-700'
+                      : darkMode ? 'bg-slate-800/40 text-slate-400 border-slate-700' : 'bg-slate-100 text-slate-500 border-slate-200'
                   }`}>
                     4. RESOLVED
                   </div>
@@ -344,15 +346,15 @@ export const CitizenMyReportsView: React.FC<CitizenMyReportsViewProps> = ({
                 darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'
               }`}>
                 <div>
-                  <span className="text-slate-400">Incident Category:</span>{' '}
+                  <span className={darkMode ? 'text-slate-400' : 'text-slate-500'}>Incident Category:</span>{' '}
                   <span className={`font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>{selectedReport.type}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400">Location / Sector:</span>{' '}
+                  <span className={darkMode ? 'text-slate-400' : 'text-slate-500'}>Location / Sector:</span>{' '}
                   <span className={`font-semibold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{selectedReport.location}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400">Citizen Observation:</span>
+                  <span className={darkMode ? 'text-slate-400' : 'text-slate-500'}>Citizen Observation:</span>
                   <p className={`mt-0.5 leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                     {selectedReport.citizenReportText || (selectedReport as any).description}
                   </p>
@@ -367,7 +369,9 @@ export const CitizenMyReportsView: React.FC<CitizenMyReportsViewProps> = ({
 
               <button
                 onClick={() => setSelectedReport(null)}
-                className="w-full py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs cursor-pointer"
+                className={`w-full py-3 rounded-2xl text-white font-bold text-xs cursor-pointer ${
+                  darkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-800 hover:bg-slate-900'
+                }`}
               >
                 Close Ticket
               </button>

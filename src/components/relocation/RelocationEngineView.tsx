@@ -500,13 +500,13 @@ export const RelocationEngineView: React.FC<RelocationEngineViewProps> = ({
                     >
                       <div className="truncate max-w-[200px]">
                         <span>{safeZone.name}</span>
-                        <div className="text-[10px] text-slate-400 font-normal">
+                        <div className={`text-[10px] font-normal ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                           {calculatedDistKm} km &bull; {safeZone.availableCapacity.toLocaleString()} beds free
                         </div>
                       </div>
                       <div className="text-right shrink-0">
-                        <span className="font-mono text-xs text-cyan-400">Score: {compositeScore}%</span>
-                        {!isSufficient && <div className="text-[9px] text-rose-400">Capacity Deficit</div>}
+                        <span className="font-mono text-xs text-cyan-600 dark:text-cyan-400">Score: {compositeScore}%</span>
+                        {!isSufficient && <div className="text-[9px] text-rose-500">Capacity Deficit</div>}
                       </div>
                     </div>
                   ))}
@@ -545,7 +545,7 @@ export const RelocationEngineView: React.FC<RelocationEngineViewProps> = ({
               </div>
 
               {/* Simulation Controls */}
-              <div className="pt-3 border-t border-slate-800/80 space-y-2">
+              <div className={`pt-3 border-t space-y-2 ${darkMode ? 'border-slate-800/80' : 'border-slate-200'}`}>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setIsSimulating(!isSimulating)}
