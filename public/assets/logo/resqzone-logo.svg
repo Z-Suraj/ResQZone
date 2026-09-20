@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Shield Border Gradient (Orange-Red) -->
+    <linearGradient id="fullShieldBorderGrad" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#ff5722"/>
+      <stop offset="40%" stop-color="#ff3320"/>
+      <stop offset="100%" stop-color="#d90429"/>
+    </linearGradient>
+
+    <!-- River/Highway Gradient (Cyan to Deep Royal Blue) -->
+    <linearGradient id="fullRiverGrad" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="35%" stop-color="#0284c7"/>
+      <stop offset="70%" stop-color="#0066ff"/>
+      <stop offset="100%" stop-color="#0040c8"/>
+    </linearGradient>
+
+    <!-- Dark Shield Interior -->
+    <linearGradient id="fullShieldBgGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#0a1224"/>
+      <stop offset="100%" stop-color="#060b16"/>
+    </linearGradient>
+
+    <!-- Pin Shadow -->
+    <filter id="fullPinShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Shield Glow -->
+    <filter id="fullShieldGlow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#ff3320" flood-opacity="0.3"/>
+    </filter>
+
+    <clipPath id="fullShieldClip">
+      <path d="M 400 68 
+               L 508 108
+               C 522 138, 532 195, 524 256
+               C 514 326, 458 385, 400 416
+               C 342 385, 286 326, 276 256
+               C 268 195, 278 138, 292 108
+               Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- ================= EMBLEM SHIELD ================= -->
+  <g filter="url(#fullShieldGlow)">
+    <!-- Shield Fill -->
+    <path d="M 400 68 
+             L 508 108
+             C 522 138, 532 195, 524 256
+             C 514 326, 458 385, 400 416
+             C 342 385, 286 326, 276 256
+             C 268 195, 278 138, 292 108
+             Z" 
+          fill="url(#fullShieldBgGrad)"/>
+
+    <!-- Clipped Mountains and River inside shield -->
+    <g clip-path="url(#fullShieldClip)">
+      <!-- Left Mountain Range -->
+      <polygon points="250,300 290,265 310,280 338,235 366,280 395,260 400,300 250,300" 
+               fill="#ffffff"/>
+      <polygon points="338,235 366,280 342,280" 
+               fill="#e2e8f0" opacity="0.85"/>
+      
+      <!-- Right Mountain Range -->
+      <polygon points="400,300 405,260 434,280 462,235 490,280 510,265 550,300 400,300" 
+               fill="#ffffff"/>
+      <polygon points="462,235 490,280 466,280" 
+               fill="#cbd5e1" opacity="0.85"/>
+
+      <!-- Lower Mountain Base Fill -->
+      <path d="M 260 290 Q 400 270 540 290 L 540 430 L 260 430 Z" fill="#0b162c"/>
+
+      <!-- Flowing Perspective S-Curved Blue River / Evacuation Route -->
+      <path d="M 392 280
+               C 375 292, 332 302, 308 318
+               C 280 336, 274 358, 290 380
+               C 314 410, 372 420, 400 423
+               C 438 420, 482 398, 484 372
+               C 486 348, 442 330, 408 320
+               C 390 315, 380 305, 392 295
+               Z"
+            fill="url(#fullRiverGrad)"/>
+
+      <!-- Top River Feeder Stream Under Pin -->
+      <path d="M 395 272 Q 390 282 376 293 Q 408 297 405 272 Z" fill="#38bdf8"/>
+
+      <!-- Stylized Road/River Divider Ribbon -->
+      <path d="M 388 298
+               C 362 310, 324 324, 338 348
+               C 358 376, 430 358, 472 390
+               L 458 402
+               C 410 370, 338 385, 322 350
+               C 310 324, 358 305, 384 292
+               Z"
+            fill="#050a14" opacity="0.95"/>
+
+      <!-- Water Light Streak -->
+      <path d="M 310 358 C 324 340, 372 330, 410 344 C 448 358, 462 376, 462 386" 
+            stroke="#7dd3fc" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.8"/>
+    </g>
+
+    <!-- Center White Location Pin with Red Core -->
+    <g filter="url(#fullPinShadow)">
+      <path d="M 400 165
+               C 374 165, 352 186, 352 212
+               C 352 235, 378 260, 400 288
+               C 422 260, 448 235, 448 212
+               C 448 186, 426 165, 400 165
+               Z"
+            fill="#ffffff"/>
+      <circle cx="400" cy="210" r="17" fill="#e61e2b"/>
+      <circle cx="395" cy="204" r="5" fill="#ff6b6b" opacity="0.8"/>
+    </g>
+
+    <!-- Protective Shield Outer Border -->
+    <path d="M 400 68 
+             L 292 108
+             C 278 138, 268 195, 276 256
+             C 286 326, 342 385, 400 416
+             C 458 385, 514 326, 524 256
+             C 528 230, 528 202, 524 175"
+          stroke="url(#fullShieldBorderGrad)" 
+          stroke-width="24" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <path d="M 514 148 L 508 108 L 458 88" 
+          stroke="url(#fullShieldBorderGrad)" 
+          stroke-width="24" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <!-- Emergency Radio Broadcast Waves (3 Arcs radiating from top-right) -->
+    <path d="M 475 136 A 68 68 0 0 1 548 174" 
+          stroke="#ff3b20" stroke-width="16" stroke-linecap="round"/>
+    
+    <path d="M 494 112 A 104 104 0 0 1 580 162" 
+          stroke="#ff3828" stroke-width="16" stroke-linecap="round"/>
+    
+    <path d="M 518 88 A 142 142 0 0 1 612 148" 
+          stroke="#eb1c24" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= WORDMARK "RESQZONE" ================= -->
+  <g transform="translate(0, 480)">
+    <!-- R -->
+    <path d="M 125 105 L 125 25 L 175 25 C 196 25, 208 37, 208 53 C 208 67, 198 77, 185 80 L 210 105 L 184 105 L 163 83 L 149 83 L 149 105 Z M 149 43 L 149 68 L 173 68 C 182 68, 187 63, 187 56 C 187 48, 182 43, 173 43 Z" fill="#ffffff"/>
+
+    <!-- E -->
+    <path d="M 224 105 L 224 25 L 285 25 L 285 43 L 248 43 L 248 56 L 280 56 L 280 73 L 248 73 L 248 87 L 286 87 L 286 105 Z" fill="#ffffff"/>
+
+    <!-- S -->
+    <path d="M 302 96 C 309 103, 321 107, 335 107 C 352 107, 362 98, 362 86 C 362 74, 353 69, 336 65 C 314 59, 298 52, 298 37 C 298 22, 313 13, 332 13 C 347 13, 358 17, 365 24 L 354 39 C 348 34, 340 31, 331 31 C 322 31, 317 35, 317 41 C 317 48, 324 52, 341 56 C 364 62, 381 70, 381 86 C 381 102, 364 113, 343 113 C 326 113, 311 108, 301 99 Z" fill="#ffffff"/>
+
+    <!-- Q : Custom Red Circular Ring with GPS Cursor Pointer inside/as tail -->
+    <g transform="translate(444, 65)">
+      <!-- Outer Red Ring -->
+      <circle cx="0" cy="0" r="45" stroke="#ff2038" stroke-width="17" fill="none"/>
+      
+      <!-- GPS Navigation Arrow (Pointer Cursor emerging at bottom-right) -->
+      <path d="M -6 4 L 32 38 L 8 40 L 4 52 Z" fill="#ff2038"/>
+      <!-- Inner Sharp Arrow Core -->
+      <path d="M -12 -2 L 20 28 L 2 30 L -1 38 Z" fill="#ff4055"/>
+    </g>
+
+    <!-- Z -->
+    <path d="M 505 105 L 505 89 L 544 43 L 507 43 L 507 25 L 568 25 L 568 40 L 530 87 L 569 87 L 569 105 Z" fill="#ffffff"/>
+
+    <!-- O -->
+    <path d="M 586 65 C 586 41, 603 24, 628 24 C 653 24, 670 41, 670 65 C 670 89, 653 106, 628 106 C 603 106, 586 89, 586 65 Z M 647 65 C 647 50, 639 42, 628 42 C 617 42, 609 50, 609 65 C 609 80, 617 88, 628 88 C 639 88, 647 80, 647 65 Z" fill="#ffffff"/>
+
+    <!-- N -->
+    <path d="M 686 105 L 686 25 L 709 25 L 741 76 L 741 25 L 764 25 L 764 105 L 742 105 L 709 54 L 709 105 Z" fill="#ffffff"/>
+
+    <!-- E -->
+    <path d="M 780 105 L 780 25 L 841 25 L 841 43 L 804 43 L 804 56 L 836 56 L 836 73 L 804 73 L 804 87 L 842 87 L 842 105 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- ================= SUBTITLE TAGLINE ================= -->
+  <!-- "Safer People. Safer Communities." -->
+  <text x="400" y="655" 
+        text-anchor="middle" 
+        fill="#f8fafc" 
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+        font-size="27" 
+        font-weight="500" 
+        letter-spacing="2.8">
+    Safer People. Safer Communities.
+  </text>
+</svg>

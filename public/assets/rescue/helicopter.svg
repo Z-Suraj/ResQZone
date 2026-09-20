@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="heliSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="60%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#heliSky)"/>
+  <!-- Mountain Pinnacles -->
+  <polygon points="0,480 160,280 340,380 540,220 740,360 800,310 800,500 0,500" fill="#020617"/>
+  <!-- Searchlight Beam -->
+  <polygon points="410,240 180,500 580,500" fill="#fef08a" opacity="0.15"/>
+  <!-- Indian Air Force / NDRF Rescue Helicopter -->
+  <g transform="translate(320, 120)">
+    <!-- Rotor Blades (Blur effect) -->
+    <ellipse cx="140" cy="15" rx="190" ry="8" fill="#cbd5e1" opacity="0.5"/>
+    <rect x="135" y="15" width="10" height="35" fill="#475569"/>
+    <!-- Fuselage -->
+    <ellipse cx="140" cy="80" rx="90" ry="45" fill="#dc2626"/>
+    <!-- Cockpit Canopy -->
+    <path d="M 180 50 Q 220 70 215 95 L 175 95 Z" fill="#38bdf8" opacity="0.8"/>
+    <!-- Tail Boom -->
+    <path d="M 60 70 L -60 50 L -60 65 L 60 85 Z" fill="#b91c1c"/>
+    <!-- Tail Rotor & Fin -->
+    <polygon points="-60,35 -45,15 -35,55" fill="#ef4444"/>
+    <line x1="-50" y1="10" x2="-50" y2="60" stroke="#f8fafc" stroke-width="4"/>
+    <!-- Landing Skids -->
+    <line x1="80" y1="120" x2="80" y2="140" stroke="#334155" stroke-width="5"/>
+    <line x1="180" y1="120" x2="180" y2="140" stroke="#334155" stroke-width="5"/>
+    <line x1="50" y1="140" x2="220" y2="140" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+    <!-- Rescue Winch Stretcher Line -->
+    <line x1="120" y1="110" x2="100" y2="210" stroke="#f59e0b" stroke-width="3"/>
+    <rect x="80" y="210" width="40" height="15" rx="3" fill="#f59e0b"/>
+  </g>
+  <!-- Badge -->
+  <rect x="25" y="25" width="180" height="34" rx="8" fill="#0f172a" opacity="0.9"/>
+  <circle cx="45" cy="42" r="7" fill="#dc2626"/>
+  <text x="60" y="47" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" letter-spacing="1">AIR RESCUE</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="favShieldGrad" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#ff5722"/>
+      <stop offset="40%" stop-color="#ff3320"/>
+      <stop offset="100%" stop-color="#d90429"/>
+    </linearGradient>
+    <linearGradient id="favRiverGrad" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0066ff"/>
+    </linearGradient>
+    <clipPath id="favClip">
+      <path d="M 64 16 L 100 30 C 104 40, 107 58, 104 78 C 100 100, 82 118, 64 126 C 46 118, 28 100, 24 78 C 21 58, 24 40, 28 30 Z"/>
+    </clipPath>
+  </defs>
+  <!-- Background Shield -->
+  <path d="M 64 16 L 100 30 C 104 40, 107 58, 104 78 C 100 100, 82 118, 64 126 C 46 118, 28 100, 24 78 C 21 58, 24 40, 28 30 Z" fill="#070d1a"/>
+  <!-- Interior Mountains & River -->
+  <g clip-path="url(#favClip)">
+    <polygon points="18,90 32,78 40,84 48,70 56,84 64,78 66,90" fill="#ffffff"/>
+    <polygon points="64,90 66,78 74,84 82,70 90,84 96,78 110,90" fill="#ffffff"/>
+    <path d="M 20,86 Q 64,80 108,86 L 108,128 L 20,128 Z" fill="#081020"/>
+    <!-- River -->
+    <path d="M 62,82 C 54,86, 42,89, 34,95 C 26,101, 24,108, 30,116 C 40,124, 58,126, 64,127 C 74,126, 88,118, 88,110 C 89,102, 76,97, 66,94 Z" fill="url(#favRiverGrad)"/>
+    <path d="M 60,88 C 50,92, 40,96, 44,104 C 52,112, 72,106, 84,116 L 80,120 C 66,110, 44,114, 40,104 C 36,96, 50,90, 58,86 Z" fill="#050a14"/>
+  </g>
+  <!-- Location Pin -->
+  <path d="M 64 42 C 55 42, 48 49, 48 58 C 48 66, 57 75, 64 84 C 71 75, 80 66, 80 58 C 80 49, 73 42, 64 42 Z" fill="#ffffff"/>
+  <circle cx="64" cy="56" r="5.5" fill="#e61e2b"/>
+  <!-- Shield Outline -->
+  <path d="M 64 16 L 28 30 C 24 40, 21 58, 24 78 C 28 100, 46 118, 64 126 C 82 118, 100 100, 104 78 C 105 69, 105 60, 104 52" stroke="url(#favShieldGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 101 42 L 100 30 L 82 23" stroke="url(#favShieldGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Radio waves -->
+  <path d="M 88 38 A 22 22 0 0 1 112 50" stroke="#ff3b20" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 94 30 A 33 33 0 0 1 121 46" stroke="#ff3828" stroke-width="5" stroke-linecap="round"/>
+</svg>

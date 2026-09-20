@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgHimalaya" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090e17"/>
+      <stop offset="40%" stop-color="#111c2e"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <radialGradient id="glowHighlight" cx="70%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#e11d48" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bgHimalaya)"/>
+  <rect width="1600" height="900" fill="url(#glowHighlight)"/>
+  <!-- Mountain Ranges Layers -->
+  <polygon points="0,600 240,410 480,520 800,320 1100,480 1400,340 1600,490 1600,900 0,900" fill="#0b1320" opacity="0.8"/>
+  <polygon points="0,670 300,500 650,610 980,440 1300,570 1600,460 1600,900 0,900" fill="#0e1726" opacity="0.9"/>
+  <!-- Valley River Flow Line -->
+  <path d="M 0 760 Q 400 710 800 780 T 1600 750" stroke="#0284c7" stroke-width="12" fill="none" opacity="0.4"/>
+  <!-- Grid overlay -->
+  <g stroke="#334155" stroke-width="1" opacity="0.15">
+    <line x1="0" y1="150" x2="1600" y2="150"/>
+    <line x1="0" y1="300" x2="1600" y2="300"/>
+    <line x1="0" y1="450" x2="1600" y2="450"/>
+    <line x1="0" y1="600" x2="1600" y2="600"/>
+    <line x1="0" y1="750" x2="1600" y2="750"/>
+    <line x1="200" y1="0" x2="200" y2="900"/>
+    <line x1="400" y1="0" x2="400" y2="900"/>
+    <line x1="600" y1="0" x2="600" y2="900"/>
+    <line x1="800" y1="0" x2="800" y2="900"/>
+    <line x1="1000" y1="0" x2="1000" y2="900"/>
+    <line x1="1200" y1="0" x2="1200" y2="900"/>
+    <line x1="1400" y1="0" x2="1400" y2="900"/>
+  </g>
+</svg>

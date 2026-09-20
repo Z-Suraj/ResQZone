@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="boatRiver" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#082f49"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#0c4a6e"/>
+  <!-- Rapids and Waves -->
+  <path d="M 0 260 Q 200 230 400 270 T 800 250 L 800 500 L 0 500 Z" fill="url(#boatRiver)"/>
+  <!-- High Capacity Inflatable Rescue Boat -->
+  <g transform="translate(200, 210)">
+    <path d="M 20 80 C 80 120, 320 120, 380 80 L 350 40 L 50 40 Z" fill="#ea580c"/>
+    <path d="M 50 40 C 90 20, 310 20, 350 40 L 330 65 L 70 65 Z" fill="#f97316"/>
+    <!-- Life jackets crew -->
+    <circle cx="120" cy="20" r="10" fill="#fde047"/>
+    <rect x="110" y="30" width="20" height="25" rx="4" fill="#ea580c"/>
+    <circle cx="180" cy="18" r="10" fill="#fde047"/>
+    <rect x="170" y="28" width="20" height="25" rx="4" fill="#ea580c"/>
+    <circle cx="240" cy="19" r="10" fill="#fde047"/>
+    <rect x="230" y="29" width="20" height="25" rx="4" fill="#ea580c"/>
+    <!-- Lifebuoy on side -->
+    <circle cx="300" cy="70" r="12" fill="#ef4444" stroke="#ffffff" stroke-width="4"/>
+  </g>
+  <rect x="25" y="25" width="200" height="34" rx="8" fill="#082f49" opacity="0.9"/>
+  <circle cx="45" cy="42" r="7" fill="#38bdf8"/>
+  <text x="60" y="47" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" letter-spacing="1">FLOOD RESCUE BOAT</text>
+</svg>

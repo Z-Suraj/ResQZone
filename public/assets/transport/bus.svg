@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="busBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#1e293b"/>
+  <!-- Road Surface -->
+  <rect x="0" y="380" width="800" height="120" fill="#0f172a"/>
+  <line x1="0" y1="440" x2="800" y2="440" stroke="#f1f5f9" stroke-width="6" stroke-dasharray="30, 25"/>
+  <!-- Emergency Bus Silhouette -->
+  <g transform="translate(140, 160)">
+    <!-- Main Chassis -->
+    <rect x="0" y="40" width="520" height="190" rx="28" fill="url(#busBody)"/>
+    <!-- Windows Row -->
+    <rect x="30" y="60" width="70" height="65" rx="8" fill="#1e293b"/>
+    <rect x="115" y="60" width="70" height="65" rx="8" fill="#1e293b"/>
+    <rect x="200" y="60" width="70" height="65" rx="8" fill="#1e293b"/>
+    <rect x="285" y="60" width="70" height="65" rx="8" fill="#1e293b"/>
+    <rect x="370" y="60" width="70" height="65" rx="8" fill="#1e293b"/>
+    <!-- Windshield -->
+    <path d="M 455 60 L 500 110 L 455 125 Z" fill="#0f172a"/>
+    <!-- Emergency Decal -->
+    <rect x="150" y="145" width="220" height="35" rx="6" fill="#b45309"/>
+    <text x="165" y="168" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="2">EMERGENCY EVACUATION</text>
+    <!-- Headlights & Bumpers -->
+    <rect x="505" y="170" width="15" height="30" rx="4" fill="#fef08a"/>
+    <!-- Wheels -->
+    <circle cx="100" cy="230" r="42" fill="#020617"/>
+    <circle cx="100" cy="230" r="20" fill="#64748b"/>
+    <circle cx="420" cy="230" r="42" fill="#020617"/>
+    <circle cx="420" cy="230" r="20" fill="#64748b"/>
+    <!-- Roof Flashing Beacon -->
+    <ellipse cx="260" cy="36" rx="16" ry="8" fill="#ef4444"/>
+  </g>
+  <!-- Card Header -->
+  <rect x="25" y="25" width="180" height="34" rx="8" fill="#0f172a" opacity="0.9"/>
+  <circle cx="45" cy="42" r="7" fill="#f59e0b"/>
+  <text x="60" y="47" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" letter-spacing="1">EVACUATION BUS</text>
+</svg>

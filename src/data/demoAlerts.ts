@@ -1,0 +1,55 @@
+import { Alert } from '../types';
+import { IMAGES } from './assets';
+
+export const DEMO_ALERTS: Alert[] = [
+  {
+    id: 'ALT-109',
+    title: 'RED ALERT: Impending Slope Failure Sector B',
+    description: 'Geological micro-crack sensor threshold exceeded (14mm/hr) in Upper Sunil ridge, Joshimath. Evacuate Zone Red habitations immediately via NH-58 cleared corridor.',
+    severity: 'CRITICAL',
+    region: 'Chamoli District, Uttarakhand',
+    timestamp: '12 min ago',
+    active: true,
+    affectedHabitations: ['Joshimath Ward 4', 'Sunil Basti', 'Manohar Bagh'],
+    vibrationPattern: [300, 100, 300, 100, 500],
+    issuedBy: 'State Emergency Operation Centre (SEOC) Dehradun',
+    imageUrl: IMAGES.landslideAlertThumb,
+  },
+  {
+    id: 'ALT-108',
+    title: 'FLASH FLOOD WARNING: Alaknanda Basin Surge',
+    description: 'Upstream gauge recorded 120mm precipitation in 90 minutes. High sediment flood wave expected to transit Karnaprayag and Chamoli within 45 minutes.',
+    severity: 'CRITICAL',
+    region: 'Alaknanda River Catchment',
+    timestamp: '32 min ago',
+    active: true,
+    affectedHabitations: ['Chamoli Ghats', 'Sonprayag', 'Govindghat Riverside'],
+    vibrationPattern: [200, 100, 200],
+    issuedBy: 'Central Water Commission (CWC) & IMD',
+    imageUrl: IMAGES.floodAlertThumb,
+  },
+  {
+    id: 'ALT-107',
+    title: 'HEAVY RAINFALL ADVISORY: Next 24 Hours',
+    description: 'Isolated heavy to extremely heavy spells forecasted along Rudraprayag and Pauri districts. Pilgrimage pedestrian movements temporarily suspended.',
+    severity: 'WARNING',
+    region: 'Rudraprayag & Chamoli',
+    timestamp: '1 hr ago',
+    active: true,
+    affectedHabitations: ['Kedarnath', 'Guptkashi', 'Ukhimath'],
+    issuedBy: 'India Meteorological Department (IMD)',
+    imageUrl: IMAGES.aerialFlood,
+  },
+  {
+    id: 'ALT-106',
+    title: 'RELOCATION ROUTE CLEARED: NH-58 Helang Section',
+    description: 'Debris successfully cleared by Border Roads Task Force. Pilot escorted convoys permitted up to Pipalkoti Relief Enclave.',
+    severity: 'RESOLVED',
+    region: 'NH-58 Km 242-250',
+    timestamp: '2 hrs ago',
+    active: false,
+    affectedHabitations: ['Joshimath', 'Pipalkoti'],
+    issuedBy: 'Border Roads Organisation (BRO)',
+    imageUrl: IMAGES.floodedBridge,
+  }
+];
