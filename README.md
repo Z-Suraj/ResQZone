@@ -1,79 +1,187 @@
-# RESQZONE — Intelligent Hazard Red Zone & Relocation System
+# ResQZone
 
-RESQZONE is a full-featured, real-time GIS disaster response and relocation platform designed for disaster management authorities (NDRF, SDRF, SDMA) and citizens in vulnerable zones.
+### Hazard Intelligence & Relocation Support System
 
-## 🚀 Key Features
+> ResQZone is a disaster-management platform that connects **hazard detection, GIS mapping, safe zones, relocation planning, and citizen–authority coordination** in one system.
 
-- **Interactive GIS Hazard Mapping**: Real-time multi-hazard overlays (landslides, flash floods, cloudbursts) with live telemetry.
-- **Relocation & Capacity Engine**: Dynamic routing, safe shelter assignment, evacuation convoy fleet tracking, and regional capacity balancing.
-- **Authority EOC Command Center**: Incident dispatch, triage, resource staging, and real-time alert broadcasting.
-- **Citizen Safety Hub**: Single-touch emergency SOS, adaptive safe route guidance, localized settlement risk index, and verified community incident reporting.
-- **Operational High-Contrast UI**: Fully responsive operational interface supporting both daylight Light Mode and night-ops Dark Mode.
+---
 
-## 🛠️ Tech Stack
+## Problem
 
-- **Framework**: React 18 + Vite
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Mapping & GIS**: Leaflet & OpenStreetMap / CartoDB / ESRI Satellite
-- **Icons**: Lucide React
+During disasters, information is often scattered across different systems.
 
-## 📦 Getting Started
+ResQZone aims to connect:
 
-### Prerequisites
+**Hazard → Risk → People → Safe Zone → Route → Relocation → Response**
 
-- [Node.js](https://nodejs.org/) (version 18 or higher recommended)
-- `npm` or `bun`
+---
 
-### Installation
+## Solution
 
-```bash
-# Clone the repository
-git clone <your-github-repo-url>
-cd resqzone
-
-# Install dependencies
-npm install
-```
-
-### Running Locally
-
-```bash
-# Start development server
-npm run dev
-```
-
-The application will be available at `http://localhost:3000`.
-
-### Production Build
-
-```bash
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## 🌐 Deployment to GitHub
-
-To push your local repository to GitHub:
-
-```bash
-# 1. Initialize git (if not already done)
-git init -b main
-
-# 2. Stage and commit files
-git add .
-git commit -m "Initial commit of RESQZONE platform"
-
-# 3. Add your remote repository URL
-git remote add origin https://github.com/<your-username>/<your-repo-name>.git
-
-# 4. Push to main branch
-git push -u origin main
+```mermaid
+flowchart LR
+    A[Hazard] --> B[Risk Analysis]
+    B --> C[Affected People]
+    C --> D[Safe Zones]
+    D --> E[Route]
+    E --> F[Relocation]
+    F --> G[Response]
 ```
 
 ---
 
-*Built with Google AI Studio*
+## Key Features
+
+| Module               | Purpose                            |
+| -------------------- | ---------------------------------- |
+| 👤 Citizen           | Alerts, reports, rescue requests   |
+| 🏛️ Authority        | Incidents, habitations, resources  |
+| 🗺️ GIS Map          | Hazards, routes and safe zones     |
+| 🔄 Relocation Engine | Supports safer relocation planning |
+| 📊 Analytics         | Disaster and response insights     |
+| 🤖 AI Copilot        | AI-based assistance                |
+| 🏠 Safe Zones        | Shelter and capacity information   |
+
+---
+
+## System Architecture
+
+```mermaid
+flowchart TB
+    A[Data Sources] --> B[ResQZone]
+    B --> C[Citizen]
+    B --> D[Authority]
+    B --> E[GIS]
+    B --> F[Relocation]
+    B --> G[AI]
+```
+
+---
+
+## Citizen ↔ Authority
+
+```mermaid
+flowchart LR
+    A[Citizen] -->|Report / Request| B[ResQZone]
+    B -->|Information| C[Authority]
+    C -->|Response| B
+    B -->|Alert / Support| A
+```
+
+---
+
+## Project Structure
+
+```text
+ResQZone/
+│
+├── public/
+│   └── assets/
+│       ├── backgrounds/
+│       ├── disaster/
+│       ├── logo/
+│       ├── rescue/
+│       ├── safe-zones/
+│       ├── transport/
+│       └── vehicles/
+│
+├── src/
+│   ├── components/
+│   ├── auth/
+│   ├── citizen/
+│   ├── dashboard/
+│   ├── map/
+│   ├── relocation/
+│   ├── analytics/
+│   ├── incidents/
+│   ├── habitations/
+│   ├── capacity/
+│   ├── copilot/
+│   ├── layout/
+│   └── common/
+│
+├── App.tsx
+├── main.tsx
+├── index.css
+│
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
+
+---
+
+## Tech Stack
+
+```text
+Frontend      → React + TypeScript + Vite
+Styling       → Tailwind CSS
+Maps          → Leaflet
+Charts        → Recharts
+AI            → Google GenAI
+UI / Icons    → Motion + Lucide React
+Services      → Supabase / Express
+```
+
+---
+
+## Data Sources
+
+ResQZone is designed to work with multiple data categories:
+
+* Hazard and weather information
+* GIS / geographic data
+* Population and habitation data
+* Safe-zone information
+* Emergency resources
+* Verified citizen reports
+
+> Full real-time government and emergency-service integrations can be added during production deployment.
+
+---
+
+## AI Role
+
+AI works as an **assistance layer**, helping users understand information and supporting decision-making.
+
+> **AI assists. Authorized humans decide.**
+
+---
+
+## Future Scope
+
+* Real-time disaster data
+* Dynamic route safety
+* Live emergency resources
+* Government API integration
+* IoT / sensor integration
+* Dynamic shelter capacity
+* Advanced relocation optimization
+* Large-scale deployment
+
+---
+
+## Run Locally
+
+```bash
+git clone <repository-url>
+cd ResQZone
+npm install
+npm run dev
+```
+
+---
+
+## Vision
+
+> **ResQZone aims to move disaster management from simply showing information to supporting coordinated action.**
+
+### Risk → Decision → Relocation → Response
+
+---
+
+## SIH Project
+
+**ResQZone — Hazard & Relocation System**
+
+Built for **Smart India Hackathon (SIH)**.
